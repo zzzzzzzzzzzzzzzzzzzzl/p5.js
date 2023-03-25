@@ -23,25 +23,35 @@ renderFood(){
     this.p5.ellipse(i.pos[0], i.pos[1], 5, 5)
   })
 }
-visionLines(){
+renderVisionLines(){
   this.creatureArr.map((i)=>{
     this.p5.stroke(i.color)
     const creaturesInVision=i.entityTracking(this.creatureArr)
-    creaturesInVision.forEach((j)=>{
-      this.p5.line(...j)
-    })
+    // creaturesInVision.forEach((j)=>{
+    //   this.p5.line(...j)
+    // })
     this.p5.stroke(0,50,50)
     const foodInVision=i.foodTracking(this.foodArr)
-    foodInVision.forEach((j)=>{
-      this.p5.line(...j)
-    })
+    i.targetFood(foodInVision)
+    // foodInVision.forEach((j)=>{
+    //   this.p5.line(...j)
+    // })
   })
-  
+  this.renderNearestFoodLines()
+}
+renderNearestFoodLines(){
+  this.creatureArr.map((i)=>{
+    this.p5.stroke(255,50,250)
+    if(i.nearestFood){
+      this.p5.line(...i.nearestFood)
+    }
+  })
 }
 
+
 update(){
+  this.renderVisionLines()
   this.renderCreature()
-  this.visionLines()
   this.renderFood()
   this.creatureArr.forEach((i)=>{
       i.randomMove()
