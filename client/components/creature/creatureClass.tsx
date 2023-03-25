@@ -5,18 +5,20 @@ class creature{
         this.pos=[Math.random()*envSize,Math.random()*envSize]//x,y, pos
         
         this.vision=100
-        this.size=10
+        this.size=Math.random()*100
         this.speed=5*Math.random()
-        this.greed=Math.random()-.5
+        this.greed=Math.random()
         this.aggresion=Math.random()-.5
-        this.fear=(Math.random()-.5)*2
-        this.laziness=Math.random()
-        this.color=[this.aggresion*255,this.greed*255,this.fear*255]
+        // this.fear=(Math.random()-.5)*2
+        this.laziness=Math.random()-.5
+        this.color=[this.aggresion*500,this.greed*255,this.laziness*500]
+        this.energy=100
         
 
         
     }
     randomMove(){
+        
         let m=[0,0]
         if(this.nearestFood){
 
@@ -33,25 +35,25 @@ class creature{
             }
         }
         if(this.nearestEntity){
-            const fear=this.fear/this.fearMulti
-            console.log(fear)
+ 
             // console.log(this.fear,"fear")
             // console.log(this.fearMulti,"fearmulti")
             // console.log(fear,"vanilla fear")
 
             if(this.k[0]){
-                m[0]+=this.aggresion*fear
+                m[0]+=this.aggresion
             }else{
-                m[0]+=-this.aggresion*fear
+                m[0]+=-this.aggresion
             }
             if(this.k[1]){
-                m[1]+=-this.aggresion*fear
+                m[1]+=-this.aggresion
             }
             else{
-                m[1]+=this.aggresion*fear
+                m[1]+=this.aggresion
             }
 
         }
+        this.energy-=(Math.abs(m[0])+Math.abs(m[1]))*.01
 
         
         
@@ -85,7 +87,7 @@ class creature{
                 if(((i.pos[0])-(this.pos[0])<this.size*.5)&&(i.pos[0])-(this.pos[0])>-this.size*.5){
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
-                        this.size+=1
+                        this.energy+=1
                         this.vision+=1
                         
                         return false
@@ -98,13 +100,16 @@ class creature{
     eatEntity(env){
         
         return env.filter((i)=>{
-            if(((i.pos[0])-(this.pos[0])<this.size*.5)&&(i.pos[0])-(this.pos[0])>-this.size*.5){
-                if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
+            if(!(i.pos==this.pos)){
 
-                    this.size+=1
-                    this.vision+=1
-                    
-                    return false
+                if(((i.pos[0])-(this.pos[0])<this.size*.5)&&(i.pos[0])-(this.pos[0])>-this.size*.5){
+                    if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
+    
+                        this.energy+=i.size/2
+                        this.vision+=1
+                        
+                        return false
+                    }
                 }
             }
             return true
@@ -123,8 +128,6 @@ class creature{
             }
         })
         if(this.nearestEntity){
-            this.fearMulti=this.nearestEntity.size/this.size
-            console.log(this.fearMulti)
             this.k=[(this.nearestEntity.spread[2]>this.pos[0]),(this.nearestEntity.spread[3]<this.pos[1])]
         }
 

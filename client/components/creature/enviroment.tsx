@@ -53,12 +53,20 @@ renderNearestFoodLines(){
       }
   })
 }
+starvation(){
+  this.creatureArr=this.creatureArr.filter((i)=>{
+    if(i.energy>0){
+      return true
+    }
+  })
+}
 
 
 update(){
   this.renderVisionLines()
   this.renderCreature()
   this.renderFood()
+  this.starvation()
   this.creatureArr.forEach((i)=>{
       if(i.laziness<Math.random()){i.randomMove()}
       this.foodArr=i.eatFood(this.foodArr)
