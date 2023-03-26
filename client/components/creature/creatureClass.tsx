@@ -8,17 +8,22 @@ class creature{
         this.size=Math.random()*5+20
         this.speed=1
         this.greed=Math.random()
-        this.aggresion=(Math.random()-.5)
+        this.aggresion=(Math.random()-.25)
         this.fear=(Math.random())
         this.laziness=Math.random()-1
         this.color=[this.aggresion*225,this.greed*255,this.laziness*500]
         this.energy=10
         this.rop=0
+        this.snake=Array(20).fill([...this.pos])
         
 
         
     }
     randomMove(){
+        //const scaled_value = 1 - (1 / (1 + k * x)); we want to use a logorithomic scale for this
+        const scaled_value = 1 - (1 / (1 + .01 * this.size))
+        if(Math.random()>scaled_value){    this.snake.unshift([...this.pos])
+            this.snake.pop()}
         let m=[0,0]
         if(this.nearestFood){
             if(this.n[0]){
@@ -92,7 +97,8 @@ class creature{
                 if(((i.pos[0])-(this.pos[0])<this.size*.5)&&(i.pos[0])-(this.pos[0])>-this.size*.5){
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
-                        // this.size+=2
+                        this.size+=.2
+                        this.snake.unshift([...this.pos])
                         
                         
                         return false
@@ -116,7 +122,7 @@ class creature{
                         return false
                     }
                 }
-                
+
             }
             return true
         })

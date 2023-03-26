@@ -15,6 +15,12 @@ renderCreature(){
     this.p5.fill(i.color)
     this.p5.stroke(i.color)
     this.p5.ellipse(i.pos[0], i.pos[1], i.size, i.size)
+    console.log(i.snake)
+    i.snake.map((j)=>{
+        this.p5.fill(i.color)
+        this.p5.stroke(i.color)
+        this.p5.ellipse(j[0], j[1], i.size, i.size)
+    })
     // this.p5.textSize(64); // set the font size to 64 pixels
     // this.p5.textAlign(10, 10); // center the text horizontally and vertically
     // this.p5.stroke(i.colour,0,0)

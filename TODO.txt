@@ -1,0 +1,13 @@
+        TODO:
+comment code
+clean code
+
+create a genome for creature
+possibly create a DB for genomes
+make snakes??
+creatures that laeve boundries of enviroment get killed off
+fix fear and aggresion
+
+finish name generation
+finsh stat divs
+make stat divs update with use state
