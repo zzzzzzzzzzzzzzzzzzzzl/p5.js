@@ -2,26 +2,25 @@
 
 class creature{
     constructor(envSize){
-        this.pos=[Math.random()*envSize,Math.random()*envSize]//x,y, pos
+        this.pos=[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]
         
-        this.vision=100
-        this.size=Math.random()*100
-        this.speed=5*Math.random()
+        this.vision=1000
+        this.size=Math.random()*5+20
+        this.speed=1
         this.greed=Math.random()
-        this.aggresion=Math.random()-.5
-        // this.fear=(Math.random()-.5)*2
-        this.laziness=Math.random()-.5
-        this.color=[this.aggresion*500,this.greed*255,this.laziness*500]
-        this.energy=100
+        this.aggresion=(Math.random()-.5)
+        this.fear=(Math.random())
+        this.laziness=Math.random()-1
+        this.color=[this.aggresion*225,this.greed*255,this.laziness*500]
+        this.energy=10
+        this.rop=0
         
 
         
     }
     randomMove(){
-        
         let m=[0,0]
         if(this.nearestFood){
-
             if(this.n[0]){
                 m[0]+=this.greed
             }else{
@@ -34,26 +33,32 @@ class creature{
                 m[1]+=this.greed
             }
         }
+        this.rop=0
         if(this.nearestEntity){
- 
             // console.log(this.fear,"fear")
             // console.log(this.fearMulti,"fearmulti")
             // console.log(fear,"vanilla fear")
 
             if(this.k[0]){
                 m[0]+=this.aggresion
+                m[0]+=this.aggresion
             }else{
+                m[0]+=-this.aggresion
                 m[0]+=-this.aggresion
             }
             if(this.k[1]){
                 m[1]+=-this.aggresion
+                m[1]+=-this.aggresion
             }
             else{
+                m[1]+=this.aggresion
                 m[1]+=this.aggresion
             }
 
         }
-        this.energy-=(Math.abs(m[0])+Math.abs(m[1]))*.01
+        // const energyExpenditure=((Math.abs(m[0])+Math.abs(m[1]))*.001*(this.vision+100)*this.speed)+.1
+        // console.log(energyExpenditure)
+        // this.energy-=1
 
         
         
@@ -64,7 +69,7 @@ class creature{
     entityTracking(env){
         const creaturesInVision=[]
         env.forEach((i)=>{
-            if(((this.pos[0]-i.pos[0])<this.vision&&(this.pos[0]-i.pos[0])>-this.vision)&&((this.pos[1]-i.pos[1])<this.vision&&(this.pos[1]-i.pos[1])>-this.vision)){
+            if(((this.pos[0]-(i.pos[0]+(i.size)))<this.vision&&(this.pos[0]-(i.pos[0]+(i.size)))>-this.vision)&&((this.pos[1]-(i.pos[1]+(i.size)))<this.vision&&(this.pos[1]-(i.pos[1]+(i.size)))>-this.vision)){
                 creaturesInVision.push({spread:[this.pos[0],this.pos[1],i.pos[0],i.pos[1]],size:i.size})
             }
         })
@@ -87,8 +92,8 @@ class creature{
                 if(((i.pos[0])-(this.pos[0])<this.size*.5)&&(i.pos[0])-(this.pos[0])>-this.size*.5){
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
-                        this.energy+=1
-                        this.vision+=1
+                        // this.size+=2
+                        
                         
                         return false
                     }
@@ -111,6 +116,7 @@ class creature{
                         return false
                     }
                 }
+                
             }
             return true
         })

@@ -5,7 +5,7 @@ class enviroment {
   constructor(envSize,creatureCount,foodCount) {
     
     this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize)})
-    this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[Math.random()*envSize,Math.random()*envSize]}})
+    this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]}})
     
     this.draw(envSize)
 
@@ -15,6 +15,11 @@ renderCreature(){
     this.p5.fill(i.color)
     this.p5.stroke(i.color)
     this.p5.ellipse(i.pos[0], i.pos[1], i.size, i.size)
+    // this.p5.textSize(64); // set the font size to 64 pixels
+    // this.p5.textAlign(10, 10); // center the text horizontally and vertically
+    // this.p5.stroke(i.colour,0,0)
+    // this.p5.fill(i.colour,0,0)
+    // this.p5.text(`${i.rop.toFixed(1)}`, i.pos[0], i.pos[1]);
   })
 }
 renderFood(){
@@ -60,12 +65,17 @@ starvation(){
     }
   })
 }
-
+mousePressed() {
+  if (this.p5.mouseIsPressed&& this.p5.mouseButton===this.p5.LEFT) {
+    this.foodArr.push({pos:[this.p5.mouseX,this.p5.mouseY]})
+  }
+}
 
 update(){
   this.renderVisionLines()
   this.renderCreature()
   this.renderFood()
+  this.mousePressed()
   this.starvation()
   this.creatureArr.forEach((i)=>{
       if(i.laziness<Math.random()){i.randomMove()}
@@ -99,7 +109,7 @@ creatureStats(){
             id="stat"
             style={{ color: "black", backgroundColor: color }}
           >
-            <div>size: {i.size}</div>
+            <div>size: {i.size.toFixed(2)}</div>
             <div>speed: {i.speed.toFixed(2)}</div>
             <div>vision: {i.vision.toFixed(2)}</div>
           </div>

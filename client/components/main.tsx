@@ -1,6 +1,6 @@
 import enviroment from './creature/enviroment';
 
-let a=new enviroment(1700,20,1000)
+let a=new enviroment(1000,100,100)
 
 function Canvas() {
 
