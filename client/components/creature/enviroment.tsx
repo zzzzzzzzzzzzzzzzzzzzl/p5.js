@@ -3,11 +3,29 @@ import creature from './creatureClass';
 
 class enviroment {
   constructor(envSize,creatureCount,foodCount) {
+
+    this.count=0
+
+    
     
     this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize)})
     this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]}})
     
+
+    this.fittnessArr=[]
+    this.genePool=this.creatureArr.map((i)=>{
+      return i.gene})
+      console.log(this.genePool)
     this.draw(envSize)
+
+    let timer = setInterval(() => {
+
+      this.creatureArr.map((i)=>{
+        i.fittness++
+      })
+      this.count++;
+      console.log( this.count);
+    }, 1000);
 
 }
 renderCreature(){
@@ -15,17 +33,11 @@ renderCreature(){
     this.p5.fill(i.color)
     this.p5.stroke(i.color)
     this.p5.ellipse(i.pos[0], i.pos[1], i.size, i.size)
-    console.log(i.snake)
     i.snake.map((j)=>{
         this.p5.fill(i.color)
         this.p5.stroke(i.color)
         this.p5.ellipse(j[0], j[1], i.size, i.size)
     })
-    // this.p5.textSize(64); // set the font size to 64 pixels
-    // this.p5.textAlign(10, 10); // center the text horizontally and vertically
-    // this.p5.stroke(i.colour,0,0)
-    // this.p5.fill(i.colour,0,0)
-    // this.p5.text(`${i.rop.toFixed(1)}`, i.pos[0], i.pos[1]);
   })
 }
 renderFood(){
@@ -66,10 +78,31 @@ renderNearestFoodLines(){
 }
 starvation(){
   this.creatureArr=this.creatureArr.filter((i)=>{
+    
     if(i.energy>0){
+      this.fittnessArr.push({fitness:i.fitness,gene:i.gene})
       return true
     }
   })
+}
+
+processRemainingCreatures(){
+  this.creatureArr.map((i)=>{
+    this.fittnessArr.push({fitness:i.fitness+5,gene:i.gene})
+  })
+  this.creatureArr=[]
+  
+}
+
+
+spawnNextGeneration(){}
+fn(){
+  if (this.count==5||this.creatureArr.length<2){
+    this.processRemainingCreatures()
+    console.log("next generation")
+    this.count=0
+  }
+
 }
 mousePressed() {
   if (this.p5.mouseIsPressed&& this.p5.mouseButton===this.p5.LEFT) {
@@ -78,13 +111,14 @@ mousePressed() {
 }
 
 update(){
+  this.spawnNextGeneration()
   this.renderVisionLines()
   this.renderCreature()
   this.renderFood()
   this.mousePressed()
   this.starvation()
   this.creatureArr.forEach((i)=>{
-      if(i.laziness<Math.random()){i.randomMove()}
+    i.randomMove()
       this.foodArr=i.eatFood(this.foodArr)
       this.creatureArr=i.eatFood(this.creatureArr)
   })

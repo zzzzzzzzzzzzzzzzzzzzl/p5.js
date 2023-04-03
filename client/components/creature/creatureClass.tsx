@@ -1,26 +1,31 @@
 
 
 class creature{
-    constructor(envSize){
+    constructor(envSize,gene={vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),aggresion:(Math.random()-.25),
+        largeAggresion:(Math.random()-.75),smallAggresion:(Math.random()-.25)}){
         this.pos=[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]
         
-        this.vision=1000
+        this.fitness=0
+
+        this.vision=50+500*Math.random()
         this.size=Math.random()*5+20
-        this.speed=1
+        this.speed=.5+Math.random()
         this.greed=Math.random()
         this.aggresion=(Math.random()-.25)
-        this.fear=(Math.random())
-        this.laziness=Math.random()-1
-        this.color=[this.aggresion*225,this.greed*255,this.laziness*500]
+        this.largeAggresion=(Math.random()-.75)
+        this.smallAggresion=(Math.random()-.25)
+        this.color=[this.aggresion*225,this.greed*255,55]
         this.energy=10
-        this.rop=0
-        this.snake=Array(20).fill([...this.pos])
+
+        this.snake=Array(5).fill([...this.pos])
+        this.gene={vision:this.vision,size:this.size,greed:this.greed,aggresion:this.aggresion,largeAggresion:this.largeAggresion,smallAggresion:this.smallAggresion}
         
 
         
     }
     randomMove(){
-        //const scaled_value = 1 - (1 / (1 + k * x)); we want to use a logorithomic scale for this
+        this.energy-=.05
+
         const scaled_value = 1 - (1 / (1 + .01 * this.size))
         if(Math.random()>scaled_value){    this.snake.unshift([...this.pos])
             this.snake.pop()}
@@ -38,12 +43,42 @@ class creature{
                 m[1]+=this.greed
             }
         }
-        this.rop=0
         if(this.nearestEntity){
-            // console.log(this.fear,"fear")
-            // console.log(this.fearMulti,"fearmulti")
-            // console.log(fear,"vanilla fear")
+            if (this.nearestEntity.size<this.size){
+                if(this.k[0]){
+                    m[0]+=this.largeAggresion
+                    m[0]+=this.largeAggresion
+                }else{
+                    m[0]+=-this.largeAggresion
+                    m[0]+=-this.largeAggresion
+                }
+                if(this.k[1]){
+                    m[1]+=-this.largeAggresion
+                    m[1]+=-this.largeAggresion
+                }
+                else{
+                    m[1]+=this.largeAggresion
+                    m[1]+=this.largeAggresion
+                }
+            }
+            if (this.nearestEntity.size>this.size){
 
+                if(this.k[0]){
+                    m[0]+= this.smallAggresion
+                    m[0]+=this.smallAggresion
+                }else{
+                    m[0]+=-this.smallAggresion
+                    m[0]+=-this.smallAggresion
+                }
+                if(this.k[1]){
+                    m[1]+=-this.smallAggresion
+                    m[1]+=-this.smallAggresion
+                }
+                else{
+                    m[1]+=this.smallAggresion
+                    m[1]+=this.smallAggresion
+                }
+            }
             if(this.k[0]){
                 m[0]+=this.aggresion
                 m[0]+=this.aggresion
@@ -59,11 +94,8 @@ class creature{
                 m[1]+=this.aggresion
                 m[1]+=this.aggresion
             }
-
         }
-        // const energyExpenditure=((Math.abs(m[0])+Math.abs(m[1]))*.001*(this.vision+100)*this.speed)+.1
-        // console.log(energyExpenditure)
-        // this.energy-=1
+
 
         
         
@@ -97,8 +129,7 @@ class creature{
                 if(((i.pos[0])-(this.pos[0])<this.size*.5)&&(i.pos[0])-(this.pos[0])>-this.size*.5){
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
-                        this.size+=.2
-                        this.snake.unshift([...this.pos])
+                        this.energy+=1
                         
                         
                         return false
@@ -158,7 +189,8 @@ class creature{
             this.n=[(this.nearestFood[2]>this.pos[0]),(this.nearestFood[3]<this.pos[1])]
         }
     }
-    foodResponse(){
+    increaseFitness(){
+        this.fitness++
     }
 }
 
