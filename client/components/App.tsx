@@ -9,6 +9,7 @@ import GetWord from "./words/wordsApi"
 function App() {
   return (
     <div>
+
       <GetWord/>
       <Canvas/>
       

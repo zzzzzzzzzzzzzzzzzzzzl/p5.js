@@ -1,32 +1,32 @@
 
 
 class creature{
-    constructor(envSize,gene={vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),aggresion:(Math.random()-.25),
+    constructor(envSize,gene={vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),speed:.5+Math.random(),aggresion:(Math.random()-.25),
         largeAggresion:(Math.random()-.75),smallAggresion:(Math.random()-.25)}){
         this.pos=[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]
         
         this.fitness=0
 
-        this.vision=50+500*Math.random()
-        this.size=Math.random()*5+20
+        this.vision=gene.vision
+        this.size=gene.size
         this.speed=.5+Math.random()
         this.greed=Math.random()
-        this.aggresion=(Math.random()-.25)
+        this.aggresion=(Math.random()-.5)
         this.largeAggresion=(Math.random()-.75)
         this.smallAggresion=(Math.random()-.25)
         this.color=[this.aggresion*225,this.greed*255,55]
         this.energy=10
 
-        this.snake=Array(5).fill([...this.pos])
+        this.snake=Array(15).fill([...this.pos])
         this.gene={vision:this.vision,size:this.size,greed:this.greed,aggresion:this.aggresion,largeAggresion:this.largeAggresion,smallAggresion:this.smallAggresion}
         
 
         
     }
     randomMove(){
-        this.energy-=.05
+        this.energy-=.01
 
-        const scaled_value = 1 - (1 / (1 + .01 * this.size))
+        const scaled_value = 1 - (1 / (1 + .05 * this.size))
         if(Math.random()>scaled_value){    this.snake.unshift([...this.pos])
             this.snake.pop()}
         let m=[0,0]
@@ -44,41 +44,41 @@ class creature{
             }
         }
         if(this.nearestEntity){
-            if (this.nearestEntity.size<this.size){
-                if(this.k[0]){
-                    m[0]+=this.largeAggresion
-                    m[0]+=this.largeAggresion
-                }else{
-                    m[0]+=-this.largeAggresion
-                    m[0]+=-this.largeAggresion
-                }
-                if(this.k[1]){
-                    m[1]+=-this.largeAggresion
-                    m[1]+=-this.largeAggresion
-                }
-                else{
-                    m[1]+=this.largeAggresion
-                    m[1]+=this.largeAggresion
-                }
-            }
-            if (this.nearestEntity.size>this.size){
+            // if (this.nearestEntity.size<this.size){
+            //     if(this.k[0]){
+            //         m[0]+=this.largeAggresion
+            //         m[0]+=this.largeAggresion
+            //     }else{
+            //         m[0]+=-this.largeAggresion
+            //         m[0]+=-this.largeAggresion
+            //     }
+            //     if(this.k[1]){
+            //         m[1]+=-this.largeAggresion
+            //         m[1]+=-this.largeAggresion
+            //     }
+            //     else{
+            //         m[1]+=this.largeAggresion
+            //         m[1]+=this.largeAggresion
+            //     }
+            // }
+            // if (this.nearestEntity.size>this.size){
 
-                if(this.k[0]){
-                    m[0]+= this.smallAggresion
-                    m[0]+=this.smallAggresion
-                }else{
-                    m[0]+=-this.smallAggresion
-                    m[0]+=-this.smallAggresion
-                }
-                if(this.k[1]){
-                    m[1]+=-this.smallAggresion
-                    m[1]+=-this.smallAggresion
-                }
-                else{
-                    m[1]+=this.smallAggresion
-                    m[1]+=this.smallAggresion
-                }
-            }
+            //     if(this.k[0]){
+            //         m[0]+= this.smallAggresion
+            //         m[0]+=this.smallAggresion
+            //     }else{
+            //         m[0]+=-this.smallAggresion
+            //         m[0]+=-this.smallAggresion
+            //     }
+            //     if(this.k[1]){
+            //         m[1]+=-this.smallAggresion
+            //         m[1]+=-this.smallAggresion
+            //     }
+            //     else{
+            //         m[1]+=this.smallAggresion
+            //         m[1]+=this.smallAggresion
+            //     }
+            // }
             if(this.k[0]){
                 m[0]+=this.aggresion
                 m[0]+=this.aggresion
@@ -130,6 +130,7 @@ class creature{
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
                         this.energy+=1
+                        this.size+=.2
                         
                         
                         return false
@@ -140,16 +141,17 @@ class creature{
         })
     }
     eatEntity(env){
-        
-        return env.filter((i)=>{
+        let newArr=[]
+        env= env.filter((i)=>{
             if(!(i.pos==this.pos)){
 
                 if(((i.pos[0])-(this.pos[0])<this.size*.5)&&(i.pos[0])-(this.pos[0])>-this.size*.5){
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
                         this.energy+=i.size/2
+                        this.size+=i.size*.2
                         this.vision+=1
-                        
+                        newArr.push({fitness:this.fitness,gene:this.gene})
                         return false
                     }
                 }
@@ -157,6 +159,8 @@ class creature{
             }
             return true
         })
+        // console.log(newArr,"here")
+        return [env,newArr]
     }
     targetEntity(vision){
         this.nearestEntity=null

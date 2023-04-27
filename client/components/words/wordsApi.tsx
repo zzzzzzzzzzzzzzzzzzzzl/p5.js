@@ -18,9 +18,9 @@ function GetWord() {
   const [word, setWord] = useState([]);
   async function getNature(){
     console.log(
-       await getSimillarWords('aggresive'),
-        await getSimillarWords('greedy'),
-        await getSimillarWords('fearful')
+       await getSimillarWords('loveliness'),
+        await getSimillarWords('beautiful'),
+        await getSimillarWords('serenity')
       )
       return{
         aggresive:await getSimillarWords('aggresive'),
