@@ -5,11 +5,16 @@ class enviroment {
   constructor(envSize,creatureCount,foodCount) {
 
     this.count=0
-
+    this.envSize=envSize
+    this.creatureCount=creatureCount
+    this.foodCount=foodCount
     
     
     this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize)})
-    this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]}})
+
+
+    this.genFood()
+    //this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]}})
     
 
     this.fittnessArr=[]
@@ -26,6 +31,18 @@ class enviroment {
       this.count++;
       console.log( this.count);
     }, 1000);
+
+}
+
+genFood(){
+  this.foodArr=Array(this.foodCount).fill().map(()=>{return {pos:[(Math.random()*(this.envSize-100)+50),(Math.random()*(this.envSize-100)+50)]}})
+}
+genCreature(gene=null){
+  if(gene){
+  }
+  else{
+    this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize)})
+  }
 
 }
 renderCreature(){
