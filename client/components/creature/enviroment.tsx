@@ -62,7 +62,7 @@ renderVisionLines(){
   this.creatureArr.map((i)=>{
     this.p5.stroke(i.color)
     const creaturesInVision=i.entityTracking(this.creatureArr)
-    i.targetEntity(creaturesInVision)
+    // i.targetEntity(creaturesInVision)
     creaturesInVision.forEach((j)=>{
     })
     // this.p5.stroke(0,50,50)
