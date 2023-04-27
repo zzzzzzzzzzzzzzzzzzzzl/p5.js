@@ -9,12 +9,12 @@ class creature{
 
         this.vision=gene.vision
         this.size=gene.size
-        this.speed=.5+Math.random()
+        this.speed=1+Math.random()
         this.greed=Math.random()
-        this.aggresion=(Math.random())
+        this.aggresion=(-1-Math.random())
         this.largeAggresion=(Math.random()-.75)
         this.smallAggresion=(Math.random()-.25)
-        this.color=[this.aggresion*225,this.greed*255,55]
+        this.color=[this.aggresion*225,this.greed*255,this.vision]
         this.energy=10
 
         this.snake=Array(15).fill([...this.pos])
@@ -149,7 +149,7 @@ class creature{
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
                         this.energy+=i.size/2
-                        this.size+=i.size*.2
+                        this.size+=i.size*.1
                         this.vision+=1
                         newArr.push({fitness:this.fitness,gene:this.gene})
                         return false
