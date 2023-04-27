@@ -9,22 +9,22 @@ class creature{
 
         this.vision=gene.vision
         this.size=gene.size
-        this.speed=1+Math.random()
+        this.speed=.2+Math.random()
         this.greed=Math.random()
-        this.aggresion=(-1-Math.random())
-        this.largeAggresion=(Math.random()-.75)
-        this.smallAggresion=(Math.random()-.25)
-        this.color=[this.aggresion*225,this.greed*255,this.vision]
+        this.aggresion=(Math.random()-.5)
+        // this.largeAggresion=(Math.random()-.75)
+        // this.smallAggresion=(Math.random()-.25)
+        this.color=[this.aggresion*225,this.greed*255,50]
         this.energy=10
 
-        this.snake=Array(15).fill([...this.pos])
+        this.snake=Array(5).fill([...this.pos])
         this.gene={vision:this.vision,size:this.size,greed:this.greed,aggresion:this.aggresion,largeAggresion:this.largeAggresion,smallAggresion:this.smallAggresion}
         
 
         
     }
     randomMove(){
-        this.energy-=.01
+        // this.energy-=.01
 
         const scaled_value = 1 - (1 / (1 + .05 * this.size))
         if(Math.random()>scaled_value){    this.snake.unshift([...this.pos])

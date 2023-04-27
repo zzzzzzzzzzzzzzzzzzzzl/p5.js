@@ -144,7 +144,6 @@ spawnNextGeneration(){
     this.genFood()
     this.genCreature()
   }
-
 }
 mousePressed() {
   if (this.p5.mouseIsPressed&& this.p5.mouseButton===this.p5.LEFT) {
@@ -178,7 +177,7 @@ draw(envSize){
     }
 
     this.p5.draw = () => {
-      // this.p5.background(0)
+      this.p5.background(0)
       this.update(this.creatureArr)      
     }
   })
