@@ -11,7 +11,7 @@ class creature{
         this.size=gene.size
         this.speed=.5+Math.random()
         this.greed=Math.random()
-        this.aggresion=(Math.random()-.5)
+        this.aggresion=(Math.random())
         this.largeAggresion=(Math.random()-.75)
         this.smallAggresion=(Math.random()-.25)
         this.color=[this.aggresion*225,this.greed*255,55]
