@@ -1,7 +1,7 @@
 
 
 class creature{
-    constructor(envSize,gene={vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),speed:.5+Math.random(),aggresion:(Math.random()-.25),
+    constructor(envSize,gene={vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),speed:.5+Math.random(),aggresion:(Math.random()-.75),
         largeAggresion:(Math.random()-.75),smallAggresion:(Math.random()-.25)}){
         this.pos=[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]
         
@@ -18,12 +18,12 @@ class creature{
         
 
         this.snake=Array(5).fill([...this.pos])
-        this.gene=this.gene
+        this.gene=gene
 
         
     }
     randomMove(){
-        // this.energy-=.01
+        this.energy-=.01
 
         const scaled_value = 1 - (1 / (1 + .05 * this.size))
         if(Math.random()>scaled_value){    this.snake.unshift([...this.pos])
@@ -119,7 +119,7 @@ class creature{
                     if(((i.pos[1])-(this.pos[1])<this.size*.5)&&(i.pos[1])-(this.pos[1])>-this.size*.5){
     
                         this.energy+=i.size/2
-                        this.size+=i.size*.1
+                        this.size+=i.size*.3
                         this.vision+=1
                         newArr.push({fitness:this.fitness,gene:this.gene})
                         return false

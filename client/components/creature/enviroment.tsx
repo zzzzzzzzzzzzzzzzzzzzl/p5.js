@@ -1,6 +1,7 @@
 import p5 from 'p5';
 import creature from './creatureClass';
-import normalizeArray from './moveFunction'
+import {normalizeArray,mutateGene} from './geneFunctions'
+
 
 class enviroment {
   constructor(envSize,creatureCount,foodCount) {
@@ -28,10 +29,21 @@ class enviroment {
 
 }
 genCreature(){
-  if(this.fitnessArr[0]){
+  if(!this.fitnessArr[0]){
+    
     this.creatureArr=Array(this.creatureCount).fill().map(()=>{return new creature(this.envSize)})
   }else{
-    this.creatureArr=this.fitnessArr.map((i)=>{return new creature(this.envSize)})//we need to map over the fitness arr
+
+ 
+    console.log(this.fitnessArr)
+    this.fitnessArr=this.fitnessArr.map((i)=>{   // mutate the gene
+      let newArr=i
+      newArr.gene=mutateGene(newArr.gene)
+      return newArr
+    })
+    console.log(this.fitnessArr)
+
+    this.creatureArr=this.fitnessArr.map((i)=>{return new creature(this.envSize,i.gene)})//we need to map over the fitness arr
     this.fitnessArr=[]
   }
 }
@@ -109,7 +121,7 @@ processRemainingCreatures(){
 
 
 spawnNextGeneration(){
-  if (this.count==4||this.creatureArr.length<2){
+  if (this.count==28||this.creatureArr.length<2){
     this.processRemainingCreatures()
     this.count=0
     
@@ -125,7 +137,6 @@ mousePressed() {
 }
 
 update(){
-  // this.genFood()
   this.spawnNextGeneration()
   this.renderVisionLines()
   this.renderCreature()
