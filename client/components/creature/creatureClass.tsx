@@ -5,21 +5,20 @@ class creature{
         largeAggresion:(Math.random()-.75),smallAggresion:(Math.random()-.25)}){
         this.pos=[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]
         
-        this.fitness=0
+        this.fitness=1
+        this.energy=10
+
 
         this.vision=gene.vision
         this.size=gene.size
-        this.speed=.2+Math.random()
-        this.greed=Math.random()
-        this.aggresion=(Math.random()-.5)
-        // this.largeAggresion=(Math.random()-.75)
-        // this.smallAggresion=(Math.random()-.25)
+        this.speed=gene.speed
+        this.greed=gene.greed
+        this.aggresion=gene.aggresion
         this.color=[this.aggresion*225,this.greed*255,50]
-        this.energy=10
+        
 
         this.snake=Array(5).fill([...this.pos])
-        this.gene={vision:this.vision,size:this.size,greed:this.greed,aggresion:this.aggresion,largeAggresion:this.largeAggresion,smallAggresion:this.smallAggresion}
-        
+        this.gene=this.gene
 
         
     }
@@ -44,41 +43,12 @@ class creature{
             }
         }
         if(this.nearestEntity){
-            // if (this.nearestEntity.size<this.size){
-            //     if(this.k[0]){
-            //         m[0]+=this.largeAggresion
-            //         m[0]+=this.largeAggresion
-            //     }else{
-            //         m[0]+=-this.largeAggresion
-            //         m[0]+=-this.largeAggresion
-            //     }
-            //     if(this.k[1]){
-            //         m[1]+=-this.largeAggresion
-            //         m[1]+=-this.largeAggresion
-            //     }
-            //     else{
-            //         m[1]+=this.largeAggresion
-            //         m[1]+=this.largeAggresion
-            //     }
-            // }
-            // if (this.nearestEntity.size>this.size){
+            if(this.nearestEntity.size<this.size){//the entity the creature is tracking is smaller than itself
+            }
+            else{//the entity the creature is tracking is bigger than itself
 
-            //     if(this.k[0]){
-            //         m[0]+= this.smallAggresion
-            //         m[0]+=this.smallAggresion
-            //     }else{
-            //         m[0]+=-this.smallAggresion
-            //         m[0]+=-this.smallAggresion
-            //     }
-            //     if(this.k[1]){
-            //         m[1]+=-this.smallAggresion
-            //         m[1]+=-this.smallAggresion
-            //     }
-            //     else{
-            //         m[1]+=this.smallAggresion
-            //         m[1]+=this.smallAggresion
-            //     }
-            // }
+            }
+
             if(this.k[0]){
                 m[0]+=this.aggresion
                 m[0]+=this.aggresion
@@ -159,7 +129,6 @@ class creature{
             }
             return true
         })
-        // console.log(newArr,"here")
         return [env,newArr]
     }
     targetEntity(vision){

@@ -1,5 +1,6 @@
 import p5 from 'p5';
 import creature from './creatureClass';
+import normalizeArray from './moveFunction'
 
 class enviroment {
   constructor(envSize,creatureCount,foodCount) {
@@ -8,6 +9,7 @@ class enviroment {
 
     this.foodCount=foodCount
     this.envSize=envSize
+    this.creatureCount=creatureCount
     this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize)})
     this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]}})
     
@@ -26,11 +28,12 @@ class enviroment {
 
 }
 genCreature(){
-  // if(this.fitnessArr[0]){
-    this.creatureArr=Array(30).fill().map(()=>{return new creature(this.envSize)})
-  // }else{
-  //   this.creatureArr=FitnessArr.map((i)=>{return new creature(envSize)})//we need to map over the fitness arr
-  // }
+  if(this.fitnessArr[0]){
+    this.creatureArr=Array(this.creatureCount).fill().map(()=>{return new creature(this.envSize)})
+  }else{
+    this.creatureArr=this.fitnessArr.map((i)=>{return new creature(this.envSize)})//we need to map over the fitness arr
+    this.fitnessArr=[]
+  }
 }
 genFood(){
   this.foodArr=Array(this.foodCount).fill().map(()=>{return {pos:[(Math.random()*(this.envSize-100)+50),(Math.random()*(this.envSize-100)+50)]}})
@@ -90,57 +93,27 @@ starvation(){
     
     if(i.energy>0){
       return true
-
     }
     this.fitnessArr.push({fitness:i.fitness,gene:i.gene})
-    console.log(this.fitnessArr)
   })
 }
 
 processRemainingCreatures(){
   this.creatureArr.map((i)=>{
     
-    this.fitnessArr.push({fitness:i.fitness+5,gene:i.gene})
+    this.fitnessArr.push({fitness:i.fitness,gene:i.gene})
   })
   this.creatureArr=[]
-  console.log(this.fitnessArr)
-}
-
-normalizeCreatureArr(genePool){
-  let data = genePool
-  function sumArray(numbers) {
-    let sum = 0;
-    for (let i = 0; i < numbers.length; i++) {
-      sum += numbers[i];
-    }
-    return sum;
-  }
-
-let min = Math.min(...data.map((i)=>i.fitness));
-let max = Math.max(...data.map((i)=>i.fitness));
-
-let normalizedData = data.map(function(num) {
-  return (num.fitness - min) / (max - min);
-});
-
-const total=sumArray(normalizedData)
-function getGene(){
-
-  let count=0
-  let geneIdx=0
-  while(count<total){
-    geneIdx=Math.floor(Math.random()*normalizedData.length)
-    count+=normalizedData[geneIdx]
-  }
-  return genePool[geneIdx]
-}
 
 }
+
+
 spawnNextGeneration(){
-  if (this.count==25||this.creatureArr.length<2){
+  if (this.count==4||this.creatureArr.length<2){
     this.processRemainingCreatures()
-    this.normalizeCreatureArr(this.fitnessArr)
     this.count=0
+    
+    this.fitnessArr=normalizeArray(this.fitnessArr)
     this.genFood()
     this.genCreature()
   }
