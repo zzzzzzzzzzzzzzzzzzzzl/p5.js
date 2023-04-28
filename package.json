@@ -71,8 +71,11 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "express": "^4.17.2",
     "p5": "^1.6.0",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
     "ts-node": "^10.9.1"
   },
   "prettier": {

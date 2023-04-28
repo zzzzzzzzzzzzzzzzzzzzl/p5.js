@@ -8,7 +8,7 @@ function Canvas() {
 
 return  <div  style={{ display: "inline-block"}} >
     <div id="canvasParent"></div>
-    <div style={{ display: "inline-block"}}>{a.creatureStats()}</div>
+    {/* <div style={{ display: "inline-block"}}>{a.creatureStats()}</div> */}
 </div>
 }
 

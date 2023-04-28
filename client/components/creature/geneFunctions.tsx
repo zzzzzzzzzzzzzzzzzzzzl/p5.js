@@ -1,4 +1,5 @@
-
+import store from '../../store'
+import { test } from '../../slices/Slice'
 //this works, returns the input array except normalized.
 //meaning it will only take the top end of the distrubution
 export function normalizeArray(arr) {
@@ -21,6 +22,7 @@ export function normalizeArray(arr) {
             newArr.push(arr[ran])
         }
     }
+    store.dispatch(test(newArr))
     return newArr
   }
   export function mutateGene(gene){//change all of the values by 5%

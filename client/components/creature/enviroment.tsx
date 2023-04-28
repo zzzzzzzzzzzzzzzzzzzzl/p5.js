@@ -41,13 +41,11 @@ genCreature(){
   }else{
 
  
-    console.log(this.fitnessArr)
     this.fitnessArr=this.fitnessArr.map((i)=>{   // mutate the gene
       let newArr=i
       newArr.gene=mutateGene(newArr.gene)
       return newArr
     })
-    console.log(this.fitnessArr)
 
     this.creatureArr=this.fitnessArr.map((i)=>{return new creature(this.envSize,i.gene)})//we need to map over the fitness arr
     this.fitnessArr=[]
@@ -173,29 +171,7 @@ draw(envSize){
     }
   })
 }
-creatureStats(){
-  
-  return (
-    <div id="creatureStats">
-      {this.creatureArr.map((i) => {
-        const color = `rgb(${i.color})`;
 
-        return (
-          <div
-            id="stat"
-            style={{ color: "black", backgroundColor: color }}
-          >
-            <div>size: {i.size.toFixed(2)}</div>
-            <div>speed: {i.speed.toFixed(2)}</div>
-            <div>vision: {i.vision.toFixed(2)}</div>
-          </div>
-        );
-      })}
-    </div>
-  );
-  
-  
-}
   }
 
 
