@@ -8,11 +8,16 @@ class enviroment {
 
     this.count=0
 
+
     this.foodCount=foodCount
     this.envSize=envSize
     this.creatureCount=creatureCount
+
     this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize)})
-    this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]}})
+
+
+    this.genFood()
+    //this.foodArr=Array(foodCount).fill().map(()=>{return {pos:[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]}})
     
 
     this.fitnessArr=[]
@@ -28,6 +33,7 @@ class enviroment {
     }, 1000);
 
 }
+
 genCreature(){
   if(!this.fitnessArr[0]){
     
@@ -50,6 +56,7 @@ genCreature(){
 genFood(){
   this.foodArr=Array(this.foodCount).fill().map(()=>{return {pos:[(Math.random()*(this.envSize-100)+50),(Math.random()*(this.envSize-100)+50)]}})
 }
+
 renderCreature(){
   this.creatureArr.map((i)=>{
   

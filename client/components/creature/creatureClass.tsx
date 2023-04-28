@@ -23,7 +23,9 @@ class creature{
         
     }
     randomMove(){
+
         this.energy-=.01
+
 
         const scaled_value = 1 - (1 / (1 + .05 * this.size))
         if(Math.random()>scaled_value){    this.snake.unshift([...this.pos])
