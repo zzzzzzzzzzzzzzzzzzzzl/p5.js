@@ -1,13 +1,11 @@
 
 
 class creature{
-    constructor(envSize,gene={vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),speed:.5+Math.random(),aggresion:(Math.random()-.75),
-        largeAggresion:(Math.random()-.75),smallAggresion:(Math.random()-.25)}){
+    constructor(envSize,gene){
         this.pos=[(Math.random()*(envSize-100)+50),(Math.random()*(envSize-100)+50)]
         
         this.fitness=1
         this.energy=10
-
 
         this.vision=gene.vision
         this.size=gene.size
@@ -20,11 +18,12 @@ class creature{
         this.snake=Array(5).fill([...this.pos])
         this.gene=gene
 
+
         
     }
     randomMove(){
 
-        this.energy-=.01
+        this.energy-=.03
 
 
         const scaled_value = 1 - (1 / (1 + .05 * this.size))

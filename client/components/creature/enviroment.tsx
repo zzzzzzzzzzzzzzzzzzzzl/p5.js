@@ -1,6 +1,8 @@
 import p5 from 'p5';
 import creature from './creatureClass';
 import {normalizeArray,mutateGene} from './geneFunctions'
+import store from '../../store'
+import { test } from '../../slices/Slice'
 
 
 class enviroment {
@@ -12,8 +14,8 @@ class enviroment {
     this.foodCount=foodCount
     this.envSize=envSize
     this.creatureCount=creatureCount
-
-    this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize)})
+    this.creatureArr=Array(creatureCount).fill().map(()=>{return new creature(envSize,{vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),speed:.5+Math.random(),aggresion:(Math.random()-.75),
+      largeAggresion:(Math.random()-.75),smallAggresion:(Math.random()-.25)})})
 
 
     this.genFood()
@@ -23,6 +25,7 @@ class enviroment {
     this.fitnessArr=[]
     this.genePool=this.creatureArr.map((i)=>{
       return i.gene})
+    store.dispatch(test(this.genePool))
     this.draw(envSize)
 
     let timer = setInterval(() => {
@@ -37,17 +40,17 @@ class enviroment {
 genCreature(){
   if(!this.fitnessArr[0]){
     
+    
     this.creatureArr=Array(this.creatureCount).fill().map(()=>{return new creature(this.envSize)})
   }else{
 
  
     this.fitnessArr=this.fitnessArr.map((i)=>{   // mutate the gene
-      let newArr=i
-      newArr.gene=mutateGene(newArr.gene)
-      return newArr
+      return mutateGene(i)
     })
+    store.dispatch(test(this.fitnessArr.map((i)=>i)))
 
-    this.creatureArr=this.fitnessArr.map((i)=>{return new creature(this.envSize,i.gene)})//we need to map over the fitness arr
+    this.creatureArr=this.fitnessArr.map((i)=>{return new creature(this.envSize,i)})//we need to map over the fitness arr
     this.fitnessArr=[]
   }
 }
@@ -117,16 +120,14 @@ starvation(){
 
 processRemainingCreatures(){
   this.creatureArr.map((i)=>{
-    
     this.fitnessArr.push({fitness:i.fitness,gene:i.gene})
   })
   this.creatureArr=[]
-
 }
 
 
 spawnNextGeneration(){
-  if (this.count==28||this.creatureArr.length<2){
+  if (this.count>25||this.creatureArr.length<2){
     this.processRemainingCreatures()
     this.count=0
     
