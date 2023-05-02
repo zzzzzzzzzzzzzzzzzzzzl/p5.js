@@ -6,8 +6,8 @@ import { test } from '../../slices/Slice'
 
 
 class enviroment {
-  constructor(envSize,creatureCount,foodCount) {
-
+  constructor(envSize,creatureCount,foodCount,parentElement) {
+    this.parentElement=parentElement
     this.count=0
 
     this.foodCount=foodCount
@@ -26,6 +26,7 @@ class enviroment {
       return i.gene})
     store.dispatch(test(this.genePool))
     this.draw(envSize)
+    
 
     let timer = setInterval(() => {
       this.creatureArr.map((i,idx)=>{
@@ -161,7 +162,7 @@ draw(envSize){
   new p5((p5) => {
     this.p5=p5
     this.p5.setup = () => {
-      this.p5.createCanvas(envSize, envSize).parent("canvasParent")
+      this.p5.createCanvas(envSize, envSize).parent(this.parentElement)
       this.p5.background(0)
     }
 

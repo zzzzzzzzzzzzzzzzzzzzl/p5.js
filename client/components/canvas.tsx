@@ -6,8 +6,8 @@ import enviroment from './creature/enviroment';
     
     
     // let a=new enviroment(1200,100,10)
-    
-    let a=new enviroment(800,100,10)
+    const parentElement=`${Math.random()}canvas`
+    let a=new enviroment(800,100,10,parentElement )
     function Canvas() {
 
     const state = useAppSelector((state) => state.game);
@@ -15,7 +15,7 @@ import enviroment from './creature/enviroment';
 
 
 return  <div  style={{ display: "inline-block"}} >
-    <div id="canvasParent"></div>
+    <div id={parentElement}></div>
 </div>
 }
 

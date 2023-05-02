@@ -1,5 +1,4 @@
-import Canvas from "./main";
-import P5 from "./main";
+import Canvas from "./canvas";
 import Stats from "./UI/stats";
 import GetWord from "./words/wordsApi";
 import Nav from './UI/nav'
@@ -8,6 +7,9 @@ import { useAppSelector } from "../hooks";
 import Mutate from './UI/mutate'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import TopNav from './UI/topNav'
+import TempPage from './UI/tempPage'
+import TempPage2 from "./UI/tempPage2";
+import TempPage3 from "./UI/tempPage3";
 
 
 function Home(){
@@ -29,14 +31,17 @@ function App() {
 
   const state = useAppSelector((state) => state.nav);
   const canvas = useAppSelector((state) => state.canvas);
+  
   let displayCanvas='none'
-  if(canvas){
+  console.log()
+  
+  if(canvas && (useLocation().pathname=='/')){
     displayCanvas='block'
   }
+
   return (
     <div >
       {state && [0].map((i)=>{
-        console.log('help')
         return(<></>)
       })}
       <TopNav/>
@@ -45,13 +50,11 @@ function App() {
 <div style={{ display: `${displayCanvas}`}}>
       <Canvas />
 </div>
-
-      
-
       <Routes>
       <Route path="/" element={<Home/>} />
-          <Route path="/h" element={<Nav/>} />
-          <Route path="help/:name/:code" element={<Enviroment/>} />
+          <Route path="/help" element={<TempPage/>} />
+          <Route path="/hurt" element={<TempPage2/>} />
+          <Route path="/have" element={<TempPage3/>} />
       </Routes>
 
     </div>

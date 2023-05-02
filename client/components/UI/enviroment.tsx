@@ -26,7 +26,7 @@ function Enviroment() {
 
   return (
     <div>
-      <div id='stats' style={{ backgroundColor: `rgb(${colour})`, height: "150px", borderRadius: "10px", display: "inline-block", padding: "50px", margin: "5px" }}>
+      <div id='stats' style={{ backgroundColor: `rgb(${colour})`, height: "200px", borderRadius: "10px", display: "inline-block", padding: "50px", margin: "5px" }}>
         <div style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>
           want to be able to edit the enviroment <br/>
             also not connected.. but as note to self, dont put any of these above 2000

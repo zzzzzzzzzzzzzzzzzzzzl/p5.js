@@ -29,19 +29,19 @@ function handleClick(b){
 
 <Link to={'help'} onClick={() => handleClick(false)}>
   <div id='stats' style={{ backgroundColor: `rgb(${colour})`, height: "50px", borderRadius: "10px", display: "inline-block", padding: "20px", margin: "5px" ,textDecoration: 'none'}}>
-    <div style={{ color: "white", margin: "auto" ,fontSize:'21px',textDecoration: 'none'}}>stats:  </div>
+    <div style={{ color: "white", margin: "auto" ,fontSize:'21px',textDecoration: 'none'}}>About:  </div>
   </div>     
 </Link>
 
 <Link to={'hurt'} onClick={() => handleClick(false)}>
   <div id='stats' style={{ backgroundColor: `rgb(${colour})`, height: "50px", borderRadius: "10px", display: "inline-block", padding: "20px", margin: "5px" ,textDecoration: 'none'}}>
-    <div style={{ color: "white", margin: "auto" ,fontSize:'21px',textDecoration: 'none'}}>stats:  </div>
+    <div style={{ color: "white", margin: "auto" ,fontSize:'21px',textDecoration: 'none'}}>help:  </div>
   </div>     
 </Link>
 
 <Link to={'have'} onClick={() => handleClick(false)}>
   <div id='stats' style={{ backgroundColor: `rgb(${colour})`, height: "50px", borderRadius: "10px", display: "inline-block", padding: "20px", margin: "5px" ,textDecoration: 'none'}}>
-    <div style={{ color: "white", margin: "auto" ,fontSize:'21px',textDecoration: 'none'}}>stats:  </div>
+    <div style={{ color: "white", margin: "auto" ,fontSize:'21px',textDecoration: 'none'}}>Idk:  </div>
   </div>     
 </Link>
     </div>

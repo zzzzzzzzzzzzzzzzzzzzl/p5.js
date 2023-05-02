@@ -21,13 +21,13 @@ function Nav() {
     <div style={{  gridTemplateColumns: "repeat(auto-fit, minmax(200px, 3fr))", gridGap: "10px", }}>
 
           <div id='stats' onClick={handleClick} style={{ backgroundColor: `rgb(${colour})`, height: "100px", borderRadius: "10px", display: "inline-block", padding: "20px", margin: "5px" }}>
-          <div style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>stats:  </div>here </div>     
+          <div  id='stats' onClick={handleClick} style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>stats:  </div>here </div>     
 
           <div id='mutate' onClick={handleClick}style={{ backgroundColor: `rgb(${incrementColour()})`, height: "100px", borderRadius: "10px", display: "inline-block", padding: "20px", margin: "5px" }}>
-          <div style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>mutate:  </div>here </div>   
+          <div  id='mutate' onClick={handleClick} style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>mutate:  </div>here </div>   
           
           <div id='enviroment' onClick={handleClick}style={{ backgroundColor: `rgb(${incrementColour()})`, height: "100px", borderRadius: "10px", display: "inline-block", padding: "20px", margin: "5px" }}>
-          <div style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>enviroment:  </div>here </div>  
+          <div id='enviroment'  onClick={handleClick} style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>enviroment:  </div>here </div>  
 
 
 
