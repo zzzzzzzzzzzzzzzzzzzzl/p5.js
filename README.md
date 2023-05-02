@@ -1,12 +1,3 @@
-# React Boilerplate
-
-## Packages Included
-
-- react (webpack, babel, etc.)
-- react-router-dom
-- express
-- jest
-- eslint
 
 ## Setup
 
