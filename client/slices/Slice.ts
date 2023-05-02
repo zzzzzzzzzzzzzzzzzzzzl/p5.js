@@ -2,7 +2,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
-let sampleData = []
+let sampleData = {vision:50+500*Math.random(),size:Math.random()*5+20,greed:Math.random(),speed:.5+Math.random(),aggresion:(Math.random()-.75),
+  largeAggresion:(Math.random()-.75),smallAggresion:(Math.random()-.25)}
 
 export const gameSlice = createSlice({
   name: 'game',
@@ -10,12 +11,12 @@ export const gameSlice = createSlice({
 
   reducers: {
     test: (state, action) => {
-      const newState=action.payload
       return action.payload
     },
    
   },
 })
+
 export const gameSelector = (state: RootState) => state.game
 export const {
   test,

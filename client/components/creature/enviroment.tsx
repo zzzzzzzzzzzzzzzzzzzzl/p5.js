@@ -10,7 +10,6 @@ class enviroment {
 
     this.count=0
 
-
     this.foodCount=foodCount
     this.envSize=envSize
     this.creatureCount=creatureCount

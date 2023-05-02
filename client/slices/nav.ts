@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
 
-let sampleData = {stats:false,mutate:false,enviroment:false}
+let sampleData = {stats:false,mutate:false,enviroment:false,}
 
 export const navSlice = createSlice({
   name: 'nav',
@@ -19,7 +19,11 @@ export const navSlice = createSlice({
    
   },
 })
+
+
+
 export const navSelector = (state: RootState) => state.nav
+
 export const {
   changeDisplay,
 } = navSlice.actions

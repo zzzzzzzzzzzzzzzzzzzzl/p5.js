@@ -25,10 +25,10 @@ function Mutate() {
   }
 
   return (
-    <div>
-       
-      <div id='vision' style={{ backgroundColor: `rgb(${colour})`, height: "190px", borderRadius: "10px", display: "inline-block", padding: "50px", margin: "5px" }}>
+    <div >
+      <div id='vision' style={{ backgroundColor: `rgb(${colour})`, height: "210px", borderRadius: "10px", display: "inline-block", padding: "50px", margin: "5px" }}>
         <div style={{ color: "white", margin: "auto" ,fontSize:'21px'}}>
+          want to be able to insert new worms into the enviroment <br/>
         so.. dosent work yet. need to connect it to redux and then to enviroment class
           <form onSubmit={handleSizeSubmit}>
             <label>
