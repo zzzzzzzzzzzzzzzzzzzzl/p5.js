@@ -1,22 +1,17 @@
-import { useAppSelector } from '../hooks';
-import enviroment from './creature/enviroment';
+import { useAppSelector } from '../hooks'
+import enviroment from './creature/enviroment'
+import Sketch from 'react-p5'
 
+const parentElement = `${Math.random()}canvas`
+function Canvas() {
+  const state = useAppSelector((state) => state.game)
 
-
-    
-    
-    // let a=new enviroment(1200,100,10)
-    const parentElement=`${Math.random()}canvas`
-    let a=new enviroment(800,100,10,parentElement )
-    function Canvas() {
-
-    const state = useAppSelector((state) => state.game);
-
-
-
-return  <div  style={{ display: "inline-block"}} >
-    <div id={parentElement}></div>
-</div>
+  let env = new enviroment(800, 10, 100, parentElement)
+  return (
+    <div style={{ display: 'inline-block' }}>
+      <Sketch setup={env.setup} draw={env.draw} />
+    </div>
+  )
 }
 
 export default Canvas
