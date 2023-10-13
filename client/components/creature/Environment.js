@@ -16,7 +16,7 @@ class Environment {
     wormArr: Environment.wormArr,
     foodArr: Environment.foodArr,
   }
-  static divisor = 50 //how many pixels each grid should be
+  static divisor = 15 //how many pixels each grid should be
   static searchDistance = 2
 
   static renderObjects() {
@@ -131,7 +131,7 @@ class Environment {
     this.defaultGene = () => ({
       vision: 50 + 500 * Math.random(),
       size: Math.random() * 5 + 20,
-      greed: Math.random() * 0.5,
+      greed: Math.random(),
       speed: 0.5 + Math.random(),
       aggresion: Math.random() - 0.75,
       largeAggresion: Math.random() - 0.75,

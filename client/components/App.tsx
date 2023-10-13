@@ -10,6 +10,7 @@ import TopNav from './UI/topNav'
 import TempPage from './UI/tempPage'
 import TempPage2 from './UI/tempPage2'
 import TempPage3 from './UI/tempPage3'
+import FrameUpdateComponent from './UI/UpdateOnFrame'
 
 function Home() {
   const state = useAppSelector((state) => state.nav)
@@ -43,6 +44,7 @@ function App() {
         [0].map((i) => {
           return <></>
         })}
+      <FrameUpdateComponent />
       <TopNav />
       <Canvas />
       <div style={{ display: `${displayCanvas}` }}></div>

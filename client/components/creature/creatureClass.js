@@ -189,7 +189,7 @@ class creature {
   }
   eatCreature() {
     if (this.targetWorm) {
-      if (this.targetFoodDistance < this.size) {
+      if (this.targetWormDistance < this.size) {
         this.targetWorm.alive = false
       }
     }
