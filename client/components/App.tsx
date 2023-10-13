@@ -32,7 +32,6 @@ function App() {
   const canvas = useAppSelector((state) => state.canvas)
 
   let displayCanvas = 'none'
-  console.log()
 
   if (canvas && useLocation().pathname == '/') {
     displayCanvas = 'block'

@@ -1,6 +1,7 @@
         TODO:
 comment code
-clean code
+clean code--->> refactor code-->> change coodernates to object, arrays are stupid.
+replace certain variables with static variables.-->>
 
 create a genome for creature
 possibly create a DB for genomes
@@ -11,3 +12,8 @@ fix fear and aggresion
 finish name generation
 finsh stat divs
 make stat divs update with use state
+
+
+use sqrt for collision. add space partitioning
+
+finish implementing SPArr object
