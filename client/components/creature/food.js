@@ -1,10 +1,13 @@
 import Environment from './Environment'
+import Mono from './mono'
+import spacePartitioning from './spacePartioning'
 
-export class Food {
+export class Food extends Mono {
   constructor() {
+    super()
     this.pos = {
-      x: Math.random() * (Environment.envSize - 100) + 50,
-      y: Math.random() * (Environment.envSize - 100) + 50,
+      x: Math.random() * (spacePartitioning.envSize - 100) + 50,
+      y: Math.random() * (spacePartitioning.envSize - 100) + 50,
     }
     this.alive = true
     this.color = [100, 200, 10]

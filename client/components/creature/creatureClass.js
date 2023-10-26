@@ -1,30 +1,35 @@
 import Environment from './Environment'
+import { cell } from './cell'
 import { DistanceBetweenTwoPoints, vectorOfTwoPoints } from './functions'
-class creature {
+import Mono from './mono'
+import spacePartioning from './spacePartioning'
+
+class creature extends cell {
   constructor(envSize, gene) {
+    super()
+
     //what is the work flow we are trying to manage// read some books pussy
     this.vision = gene.vision
-    this.size = gene.size
     this.speed = gene.speed
     this.greed = gene.greed
     this.aggresion = gene.aggresion
     this.gene = gene
+    
+    // this.pos = {
+    //   x: Math.random() * (spacePartioning.envSize - 100) + 50,
+    //   y: Math.random() * (spacePartioning.envSize - 100) + 50,
+    // }
+    // this.alive = true
+    this.color = [this.aggresion * 225, this.greed * 255, 50]
+    // this.size = gene.size
+    
 
-    this.pos = {
-      x: Math.random() * (envSize - 100) + 50,
-      y: Math.random() * (envSize - 100) + 50,
-    }
-    this.snake = Array(10).fill({ ...this.pos })
-
-    this.alive = true
     this.fitness = 1
     this.energy = 10
 
-    this.color = [this.aggresion * 225, this.greed * 255, 50]
   }
   randomMove() {
-    this.snake.unshift({ ...this.pos })
-    this.snake.pop()
+
 
     let x = 0
     let y = 0
@@ -63,60 +68,29 @@ class creature {
     Environment.p5.fill(this.color)
     Environment.p5.stroke(this.color)
     Environment.p5.ellipse(this.pos.x, this.pos.y, this.size, this.size) //where does x and y come from what is j?
-    this.snake.map((i) => {
-      Environment.p5.ellipse(i.x, i.y, this.size, this.size) //where does x and y come from what is j?
-    })
+
   }
-  searchForWorm() {
-    let arr = []
-    for (
-      let i = -Environment.searchDistance;
-      i < 1 + Environment.searchDistance;
-      i++
-    ) {
-      for (
-        let j = -Environment.searchDistance;
-        j < 1 + Environment.searchDistance;
-        j++
-      ) {
-        if (
-          this.SPindex.x + i < Environment.SParr.length &&
-          this.SPindex.y + j < Environment.SParr.length &&
-          this.SPindex.x + i > -1 &&
-          this.SPindex.y + j > -1
-        ) {
-          Environment.SParr[this.SPindex.x + i][
-            this.SPindex.y + j
-          ].worms.forEach((k) => {
-            arr.push(k)
-            Environment.p5.stroke(250, 40, 40)
-            // Environment.p5.line(k.pos.x, k.pos.y, this.pos.x, this.pos.y)
-          })
-        }
-      }
-    }
-    return arr
-  }
+
   searchForFood() {
     let n = 0
     let arr = []
     for (
-      let i = -Environment.searchDistance;
-      i < 1 + Environment.searchDistance;
+      let i = -spacePartioning.searchDistance;
+      i < 1 + spacePartioning.searchDistance;
       i++
     ) {
       for (
-        let j = -Environment.searchDistance;
-        j < 1 + Environment.searchDistance;
+        let j = -spacePartioning.searchDistance;
+        j < 1 + spacePartioning.searchDistance;
         j++
       ) {
         if (
-          this.SPindex.x + i < Environment.SParr.length &&
-          this.SPindex.y + j < Environment.SParr.length &&
+          this.SPindex.x + i < spacePartioning.spacePartitioningArray.length &&
+          this.SPindex.y + j < spacePartioning.spacePartitioningArray.length &&
           this.SPindex.x + i > -1 &&
           this.SPindex.y + j > -1
         ) {
-          Environment.SParr[this.SPindex.x + i][
+          spacePartioning.spacePartitioningArray[this.SPindex.x + i][
             this.SPindex.y + j
           ].food.forEach((k) => {
             arr.push(k)
@@ -155,7 +129,9 @@ class creature {
     }
   }
   findNearestWorm() {
-    const arr = this.searchForWorm()
+    // const arr = this.searchForWorm()
+
+    const arr = spacePartioning.searchForCell(this)
     let lowestDistance = 9999
     let targetWorm
     arr.map((i) => {
@@ -193,6 +169,14 @@ class creature {
         this.targetWorm.alive = false
       }
     }
+  }
+  update() {
+    this.randomMove()
+    this.findNearestWorm()
+    this.findNearestFood()
+    this.eatCreature()
+    this.eatFood()
+    this.render()
   }
 }
 

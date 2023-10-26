@@ -13,11 +13,7 @@ export const canvasSlice = createSlice({
   },
 })
 
-
-
 export const canvasSelector = (state: RootState) => state.canvas
 
-export const {
-  changeDisplay,
-} = canvasSlice.actions
+export const { changeDisplay } = canvasSlice.actions
 export default canvasSlice.reducer

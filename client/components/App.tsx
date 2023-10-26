@@ -7,10 +7,7 @@ import { useAppSelector } from '../hooks'
 import Mutate from './UI/mutate'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import TopNav from './UI/topNav'
-import TempPage from './UI/tempPage'
-import TempPage2 from './UI/tempPage2'
-import TempPage3 from './UI/tempPage3'
-import FrameUpdateComponent from './UI/UpdateOnFrame'
+import Helpmegod from './UI/UpdateOnFrame'
 
 function Home() {
   const state = useAppSelector((state) => state.nav)
@@ -44,15 +41,12 @@ function App() {
         [0].map((i) => {
           return <></>
         })}
-      <FrameUpdateComponent />
+      <Helpmegod />
       <TopNav />
       <Canvas />
       <div style={{ display: `${displayCanvas}` }}></div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/help" element={<TempPage />} />
-        <Route path="/hurt" element={<TempPage2 />} />
-        <Route path="/have" element={<TempPage3 />} />
       </Routes>
     </div>
   )
