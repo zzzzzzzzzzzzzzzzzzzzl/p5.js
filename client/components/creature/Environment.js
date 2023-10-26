@@ -4,6 +4,7 @@ import { Food } from './food'
 import { storeManager } from './storeFunctions'
 import Mono from './mono'
 import spacePartitioning from './spacePartioning'
+import { cell } from './cell'
 
 // const dispatch = useAppDispatch()
 class Environment extends Mono {
@@ -62,6 +63,8 @@ class Environment extends Mono {
     Environment.storeManager.onUpdate()
     spacePartitioning.handleSpacePartitioning()
     spacePartitioning.drawGrid()
+
+
   }
   setup = (p5, canvasParentRef) => {
     Environment.p5 = p5

@@ -6,13 +6,14 @@ import spacePartioning from './spacePartioning'
 
 class creature extends cell {
   constructor(envSize, gene) {
-    super()
-
+    super("creature")
+    
     //what is the work flow we are trying to manage// read some books pussy
     this.vision = gene.vision
     this.speed = gene.speed
     this.greed = gene.greed
     this.aggresion = gene.aggresion
+    this.size=gene.size
     this.gene = gene
     
     // this.pos = {
@@ -71,39 +72,16 @@ class creature extends cell {
 
   }
 
-  searchForFood() {
-    let n = 0
-    let arr = []
-    for (
-      let i = -spacePartioning.searchDistance;
-      i < 1 + spacePartioning.searchDistance;
-      i++
-    ) {
-      for (
-        let j = -spacePartioning.searchDistance;
-        j < 1 + spacePartioning.searchDistance;
-        j++
-      ) {
-        if (
-          this.SPindex.x + i < spacePartioning.spacePartitioningArray.length &&
-          this.SPindex.y + j < spacePartioning.spacePartitioningArray.length &&
-          this.SPindex.x + i > -1 &&
-          this.SPindex.y + j > -1
-        ) {
-          spacePartioning.spacePartitioningArray[this.SPindex.x + i][
-            this.SPindex.y + j
-          ].food.forEach((k) => {
-            arr.push(k)
-            Environment.p5.stroke(1, 0, 50)
-            Environment.p5.line(k.pos.x, k.pos.y, this.pos.x, this.pos.y)
-          })
-        }
-      }
-    }
-    return arr
-  }
   findNearestFood() {
-    const arr = this.searchForFood()
+    // const arr = this.searchForFood()
+    let arr=spacePartioning.searchForCells(this)
+    arr=spacePartioning.findCellType(arr,"food")
+    arr.forEach((k) => {
+      arr.push(k)
+      Environment.p5.stroke(1, 0, 50)
+      Environment.p5.line(k.pos.x, k.pos.y, this.pos.x, this.pos.y)
+    })
+    // let creature=spacePartioning.findCellType("creature",arr)
     let lowestDistance = 9999
     let targetFood
     arr.map((i) => {
@@ -130,8 +108,9 @@ class creature extends cell {
   }
   findNearestWorm() {
     // const arr = this.searchForWorm()
-
-    const arr = spacePartioning.searchForCell(this)
+    let arr=spacePartioning.searchForCells(this)
+    arr=spacePartioning.findCellType(arr,"creature")
+    // const arr = spacePartioning.searchForWorm(this)
     let lowestDistance = 9999
     let targetWorm
     arr.map((i) => {
@@ -174,6 +153,8 @@ class creature extends cell {
     this.randomMove()
     this.findNearestWorm()
     this.findNearestFood()
+  
+
     this.eatCreature()
     this.eatFood()
     this.render()

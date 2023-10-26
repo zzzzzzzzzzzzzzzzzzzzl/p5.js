@@ -1,10 +1,12 @@
 import Environment from './Environment'
-import Mono from './mono'
+import { cell } from './cell'
 import spacePartitioning from './spacePartioning'
 
-export class Food extends Mono {
+
+export class Food extends cell {
   constructor() {
-    super()
+    super("food")
+
     this.pos = {
       x: Math.random() * (spacePartitioning.envSize - 100) + 50,
       y: Math.random() * (spacePartitioning.envSize - 100) + 50,
@@ -16,6 +18,6 @@ export class Food extends Mono {
   render() {
     Environment.p5.fill(this.color)
     Environment.p5.stroke(this.color)
-    Environment.p5.ellipse(this.pos.x, this.pos.y, this.size, this.size) //where does x and y come from what is j?
+    Environment.p5.ellipse(this.pos.x, this.pos.y, this.size, this.size) 
   }
 }

@@ -4,8 +4,11 @@ import spacePartitioning from './spacePartioning'
 
 
 export class cell extends Mono{
-    constructor() {
+    static cellArr=[]
+    constructor(type) {
         super()
+        this.type=type
+        cell.cellArr.push(this)
         this.alive = true
 
         this.pos = {
