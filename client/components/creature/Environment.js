@@ -46,7 +46,6 @@ class Environment extends Mono {
       .map(() => {
         return new creature(Environment.envSize, this.defaultGene())
       })
-      .forEach((i) => spacePartitioning.wormArr.push(i))
   }
   genFood() {
     Array(this.foodCount)
