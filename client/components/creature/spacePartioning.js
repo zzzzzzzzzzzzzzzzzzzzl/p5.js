@@ -11,7 +11,6 @@ class spacePartitioning {
   static envSize = 800
   static divisor = 50 //how many pixels each grid should be
 
-  static spacePartitioningArray 
   //holly fuck clean some of this shit up
   static handleSpacePartitioning() {
     //https://en.wikipedia.org/wiki/Space_partitioning
@@ -43,16 +42,6 @@ class spacePartitioning {
         i.alive = false
       }
     })
-    // spacePartitioning.foodArr.forEach((i) => {
-    //   const x = Math.round(i.pos.x / spacePartitioning.divisor - 0.5)
-    //   const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
-    //   spacePartitioning.spacePartitioningArray[x][y].food.push(i)
-    // })
-    // cell.cellArr.forEach((i) => {
-    //   const x = Math.round(i.pos.x / spacePartitioning.divisor - 0.5)
-    //   const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
-    //   spacePartitioning.spacePartitioningArray[x][y].cells.push(i)
-    // })
   }
   static drawGrid() {
     //light up adjasent boxes to creatures
@@ -71,13 +60,13 @@ class spacePartitioning {
       i.forEach((j, jdx) => {
         if (j[0]) {
           for (
-            let k = -spacePartitioning.searchDistance;
-            k < 1 + spacePartitioning.searchDistance;
+            let k = -Environment.searchDistance;
+            k < 1 + Environment.searchDistance;
             k++
           ) {
             for (
-              let l = -spacePartitioning.searchDistance;
-              l < 1 + spacePartitioning.searchDistance;
+              let l = -Environment.searchDistance;
+              l < 1 + Environment.searchDistance;
               l++
             ) {
               if (
@@ -117,7 +106,7 @@ class spacePartitioning {
         ) {
           spacePartitioning.spacePartitioningArray[cell.SPindex.x + i][
             cell.SPindex.y + j
-          ].cells.forEach((k) => {
+          ].forEach((k) => {
             Environment.p5.stroke(255, 0, 230)
             Environment.p5.line(
               cell.pos.x,
@@ -145,13 +134,10 @@ class spacePartitioning {
     arr.map((i) => {
       const distance = DistanceBetweenTwoPoints(cell.pos, i.pos)
       if (distance < lowestDistance && i !== cell) {
-        console.log(i.pos)
-        console.log(lowestDistance,"lowest")
         lowestDistance = distance
         targetCell = i
       }
     })
-    console.log(lowestDistance,"actual lowest")
     
     cell.targetFoodDistance = lowestDistance
     if (targetCell) {

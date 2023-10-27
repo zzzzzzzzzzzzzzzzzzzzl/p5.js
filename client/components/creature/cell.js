@@ -5,6 +5,9 @@ import spacePartitioning from './spacePartioning'
 
 export class cell extends Mono{
     static cellArr=[]
+    static filterDeadCells(){
+      cell.cellArr=cell.cellArr.filter(i=>i.alive)
+    }
     constructor(type) {
         super()
         this.type=type

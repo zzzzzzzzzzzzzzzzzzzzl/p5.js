@@ -11,12 +11,12 @@ class Environment extends Mono {
   static storeManager = new storeManager()
   static p5
   static divisor = 50 //how many pixels each grid should be
-  static searchDistance = 5
+  static searchDistance = 1
   static envSize
 
   constructor(envSize, creatureCount, foodCount) {
     super()
-    this.foodCount = 1
+    this.foodCount = foodCount
     Environment.envSize = envSize
     this.creatureCount = creatureCount
     this.defaultGene = () => ({
@@ -33,7 +33,7 @@ class Environment extends Mono {
     this.genFood()
     this.count = 0
     setInterval(() => {
-      spacePartitioning.wormArr.map((i, idx) => {
+      cell.cellArr.map((i, idx) => {
         i.fitness++
       })
       this.count++
@@ -53,14 +53,14 @@ class Environment extends Mono {
       .map(() => {
         return new Food()
       })
-      .forEach((i) => {spacePartitioning.foodArr.push(i)
-      console.log(i)})
+    
   }
 
   update() {
     Environment.storeManager.onUpdate()
     spacePartitioning.handleSpacePartitioning()
     spacePartitioning.drawGrid()
+    
 
 
   }

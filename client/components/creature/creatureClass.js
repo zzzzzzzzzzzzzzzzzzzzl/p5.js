@@ -154,6 +154,7 @@ class creature extends cell {
     // this.findNearestFood()
     let arr=spacePartioning.searchForCells(this)
     spacePartioning.findNearestCell(this,arr,"food")
+    let food=spacePartioning.findCellType(arr,"food")
     // spacePartioning.findNearestCell(this,arr,"creature")
   
 
