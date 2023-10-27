@@ -135,11 +135,8 @@ class creature extends cell {
     }
   }
   eatFood() {
-    console.log(this.targetFood)
     if (this.targetFood) {
-      console.log(this.targetFoodDistance)
       if (this.targetFoodDistance < this.size) {
-        console.log("eat")
         this.targetFood.alive = false
       }
     }
@@ -156,7 +153,6 @@ class creature extends cell {
     // this.findNearestWorm()
     // this.findNearestFood()
     let arr=spacePartioning.searchForCells(this)
-    console.log(arr)
     spacePartioning.findNearestCell(this,arr,"food")
     // spacePartioning.findNearestCell(this,arr,"creature")
   

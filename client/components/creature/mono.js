@@ -15,7 +15,6 @@ export class Mono {
         Mono.updateQueue.delete(i)
         // spacePartitioning.wormArr.delete(i)
         // spacePartitioning.wormArr.delete(i)
-        
       }
       if(i.render){
         i.render()

@@ -10,10 +10,7 @@ import { DistanceBetweenTwoPoints } from './functions'
 class spacePartitioning {
   static envSize = 800
   static divisor = 50 //how many pixels each grid should be
-  static searchDistance = 1
 
-  static wormArr = []
-  static foodArr = []
   static spacePartitioningArray 
   //holly fuck clean some of this shit up
   static handleSpacePartitioning() {
@@ -28,10 +25,10 @@ class spacePartitioning {
         )
           .fill()
           .map(() => {
-            return { worms: [], food: [],cells:[] }
+            return []
           })
       })
-    spacePartitioning.wormArr.forEach((i) => {
+    cell.cellArr.forEach((i) => {
       const x = Math.round(i.pos.x / spacePartitioning.divisor - 0.5)
       const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
       i.SPindex = { x: x, y: y }
@@ -41,21 +38,21 @@ class spacePartitioning {
         x > 0 &&
         y > 0
       ) {
-        spacePartitioning.spacePartitioningArray[x][y].worms.push(i)
+        spacePartitioning.spacePartitioningArray[x][y].push(i)
       } else {
         i.alive = false
       }
     })
-    spacePartitioning.foodArr.forEach((i) => {
-      const x = Math.round(i.pos.x / spacePartitioning.divisor - 0.5)
-      const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
-      spacePartitioning.spacePartitioningArray[x][y].food.push(i)
-    })
-    cell.cellArr.forEach((i) => {
-      const x = Math.round(i.pos.x / spacePartitioning.divisor - 0.5)
-      const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
-      spacePartitioning.spacePartitioningArray[x][y].cells.push(i)
-    })
+    // spacePartitioning.foodArr.forEach((i) => {
+    //   const x = Math.round(i.pos.x / spacePartitioning.divisor - 0.5)
+    //   const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
+    //   spacePartitioning.spacePartitioningArray[x][y].food.push(i)
+    // })
+    // cell.cellArr.forEach((i) => {
+    //   const x = Math.round(i.pos.x / spacePartitioning.divisor - 0.5)
+    //   const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
+    //   spacePartitioning.spacePartitioningArray[x][y].cells.push(i)
+    // })
   }
   static drawGrid() {
     //light up adjasent boxes to creatures
@@ -72,7 +69,7 @@ class spacePartitioning {
     })
     spacePartitioning.spacePartitioningArray.forEach((i, idx) => {
       i.forEach((j, jdx) => {
-        if (j.worms[0]) {
+        if (j[0]) {
           for (
             let k = -spacePartitioning.searchDistance;
             k < 1 + spacePartitioning.searchDistance;
