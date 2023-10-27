@@ -11,15 +11,13 @@ class Environment extends Mono {
   static storeManager = new storeManager()
   static p5
   static divisor = 50 //how many pixels each grid should be
-  static searchDistance = 2
+  static searchDistance = 1
   static envSize
 
   constructor(envSize, creatureCount, foodCount) {
     super()
     this.foodCount = foodCount
     Environment.envSize = envSize
-
-    console.log(creatureCount)
     this.creatureCount = creatureCount
     this.defaultGene = () => ({
       vision: 50 + 500 * Math.random(),

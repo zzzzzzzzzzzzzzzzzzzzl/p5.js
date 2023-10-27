@@ -60,7 +60,6 @@ class creature extends cell {
         y -= this.aggresion
       }
     }
-
     this.pos.x += (Math.random() - 0.5 + x) * this.speed
     this.pos.y += (Math.random() - 0.5 + y) * this.speed
   }
@@ -136,8 +135,11 @@ class creature extends cell {
     }
   }
   eatFood() {
+    console.log(this.targetFood)
     if (this.targetFood) {
+      console.log(this.targetFoodDistance)
       if (this.targetFoodDistance < this.size) {
+        console.log("eat")
         this.targetFood.alive = false
       }
     }
@@ -151,8 +153,12 @@ class creature extends cell {
   }
   update() {
     this.randomMove()
-    this.findNearestWorm()
-    this.findNearestFood()
+    // this.findNearestWorm()
+    // this.findNearestFood()
+    let arr=spacePartioning.searchForCells(this)
+    console.log(arr)
+    spacePartioning.findNearestCell(this,arr,"food")
+    // spacePartioning.findNearestCell(this,arr,"creature")
   
 
     this.eatCreature()

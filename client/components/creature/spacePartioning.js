@@ -4,12 +4,13 @@
 import Mono from './mono'
 import Environment from './Environment'
 import { cell } from './cell'
+import { DistanceBetweenTwoPoints } from './functions'
 
 // const dispatch = useAppDispatch()
 class spacePartitioning {
   static envSize = 800
   static divisor = 50 //how many pixels each grid should be
-  static searchDistance = 2
+  static searchDistance = 1
 
   static wormArr = []
   static foodArr = []
@@ -35,10 +36,10 @@ class spacePartitioning {
       const y = Math.round(i.pos.y / spacePartitioning.divisor - 0.5)
       i.SPindex = { x: x, y: y }
       if (
-        x < spacePartitioning.spacePartitioningArray.length &&
-        y < spacePartitioning.spacePartitioningArray.length &&
-        x > -1 &&
-        y > -1
+        x < spacePartitioning.spacePartitioningArray.length-1 &&
+        y < spacePartitioning.spacePartitioningArray.length-1 &&
+        x > 0 &&
+        y > 0
       ) {
         spacePartitioning.spacePartitioningArray[x][y].worms.push(i)
       } else {
@@ -99,37 +100,6 @@ class spacePartitioning {
       })
     })
   }
-
-  
-  static searchForWorm(worm) {//returns an array of cells that are in adjasent squares
-    let arr = []
-    for (
-      let i = -Environment.searchDistance;
-      i < 1 + Environment.searchDistance;
-      i++
-    ) {
-      for (
-        let j = -Environment.searchDistance;
-        j < 1 + Environment.searchDistance;
-        j++
-      ) {
-        if (
-          worm.SPindex.x + i < spacePartitioning.spacePartitioningArray.length &&
-          worm.SPindex.y + j < spacePartitioning.spacePartitioningArray.length &&
-          worm.SPindex.x + i > -1 &&
-          worm.SPindex.y + j > -1
-        ) {
-          spacePartitioning.spacePartitioningArray[worm.SPindex.x + i][
-            worm.SPindex.y + j
-          ].worms.forEach((k) => {
-            arr.push(k)
-          })
-        }
-      }
-    }
-    return arr
-  }
-   
   static searchForCells(cell) {//returns an array of cells that are in adjasent squares
     let arr = []
     for (
@@ -145,50 +115,62 @@ class spacePartitioning {
         if (
           cell.SPindex.x + i < spacePartitioning.spacePartitioningArray.length &&
           cell.SPindex.y + j < spacePartitioning.spacePartitioningArray.length &&
-          cell.SPindex.x + i > -1 &&
-          cell.SPindex.y + j > -1
+          cell.SPindex.x + i > 0 &&
+          cell.SPindex.y + j > 0
         ) {
           spacePartitioning.spacePartitioningArray[cell.SPindex.x + i][
             cell.SPindex.y + j
           ].cells.forEach((k) => {
+            Environment.p5.stroke(255, 0, 230)
+            Environment.p5.line(
+              cell.pos.x,
+              cell.pos.y,
+              k.pos.x,
+              k.pos.y
+            )
             arr.push(k)
           })
         }
       }
     }
     return arr
+    
   }
   static findCellType(arr,type){
     return arr.filter((i)=>i.type==type)
   }
   static findNearestCell(cell,arr,type=null){
     if(type){
-      arr=arr.findCell(arr,type)
+      arr=spacePartitioning.findCellType(arr,type)
     }
     let lowestDistance = 9999
     let targetCell
     arr.map((i) => {
       const distance = DistanceBetweenTwoPoints(cell.pos, i.pos)
       if (distance < lowestDistance && i !== cell) {
+        console.log(i.pos)
+        console.log(lowestDistance,"lowest")
         lowestDistance = distance
         targetCell = i
       }
     })
-    this.targetWormDistance = lowestDistance
+    console.log(lowestDistance,"actual lowest")
+    
+    cell.targetFoodDistance = lowestDistance
     if (targetCell) {
-      this.targetCell = targetCell
+      cell.targetFood = targetCell
 
       Environment.p5.stroke(255, 0, 230)
       Environment.p5.line(
-        this.pos.x,
-        this.pos.y,
+        cell.pos.x,
+        cell.pos.y,
         targetCell.pos.x,
         targetCell.pos.y
       )
     } else {
-      this.targetCell = null
+      cell.targetCell = null
     }
-
+    return 
   }
 }
 

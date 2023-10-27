@@ -1,3 +1,5 @@
+import spacePartitioning from "./spacePartioning"
+
 //handles updates
 
 export class Mono {
@@ -11,6 +13,9 @@ export class Mono {
       }
       if (!i.alive) {
         Mono.updateQueue.delete(i)
+        // spacePartitioning.wormArr.delete(i)
+        // spacePartitioning.wormArr.delete(i)
+        
       }
       if(i.render){
         i.render()
