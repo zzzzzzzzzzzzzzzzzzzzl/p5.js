@@ -19,5 +19,6 @@ export class Food extends cell {
     Environment.p5.fill(this.color)
     Environment.p5.stroke(this.color)
     Environment.p5.ellipse(this.pos.x, this.pos.y, this.size, this.size) 
+    this.color=[100, 200, 10]
   }
 }

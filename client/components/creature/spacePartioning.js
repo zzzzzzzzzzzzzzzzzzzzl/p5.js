@@ -4,7 +4,8 @@
 import Mono from './mono'
 import Environment from './Environment'
 import { cell } from './cell'
-import { DistanceBetweenTwoPoints } from './functions'
+import { DistanceBetweenTwoPoints, getVectorRotation, vectorOfTwoPoints } from './functions'
+import { isConstructorDeclaration } from 'typescript'
 
 // const dispatch = useAppDispatch()
 class spacePartitioning {
@@ -71,7 +72,8 @@ class spacePartitioning {
             ) {
               if (
                 idx + k < spacePartitioning.spacePartitioningArray.length &&
-                jdx + l < spacePartitioning.spacePartitioningArray.length
+                jdx + l < spacePartitioning.spacePartitioningArray.length &&
+                j[0].type=="creature"
               ) {
                 Environment.p5.fill(150, 50, 50)
                 Environment.p5.square(
@@ -102,19 +104,23 @@ class spacePartitioning {
           cell.SPindex.x + i < spacePartitioning.spacePartitioningArray.length &&
           cell.SPindex.y + j < spacePartitioning.spacePartitioningArray.length &&
           cell.SPindex.x + i > 0 &&
-          cell.SPindex.y + j > 0
+          cell.SPindex.y + j > 0 
         ) {
           spacePartitioning.spacePartitioningArray[cell.SPindex.x + i][
             cell.SPindex.y + j
           ].forEach((k) => {
-            Environment.p5.stroke(255, 0, 230)
-            Environment.p5.line(
-              cell.pos.x,
-              cell.pos.y,
-              k.pos.x,
-              k.pos.y
-            )
-            arr.push(k)
+
+            if(k!=cell){
+
+              Environment.p5.stroke(255, 0, 230)
+              Environment.p5.line(
+                cell.pos.x,
+                cell.pos.y,
+                k.pos.x,
+                k.pos.y
+              )
+              arr.push(k)
+            }
           })
         }
       }
@@ -142,6 +148,7 @@ class spacePartitioning {
     cell.targetFoodDistance = lowestDistance
     if (targetCell) {
       cell.targetFood = targetCell
+      targetCell.color=[0,0,0]
 
       Environment.p5.stroke(255, 0, 230)
       Environment.p5.line(
@@ -153,7 +160,35 @@ class spacePartitioning {
     } else {
       cell.targetCell = null
     }
-    return 
+    return targetCell
+  }
+  static getCellVectorRotation(cell2,cell){
+    const vec=vectorOfTwoPoints(cell.pos,cell2.pos)
+    return getVectorRotation(vec)
+  }
+  //returns the relative rotation of cell and cells in arr
+  static getCellVectorRotationArr(cell,cellArr){
+    return cellArr.map(i=>{
+      return spacePartitioning.getCellVectorRotation(cell,i)
+    })
+  }
+  static getCellInVisionArr(cell,cellArr){
+    
+    const low=cell.rotation-cell.cone
+    const high=cell.rotation+cell.cone
+    return cellArr.filter(i=>{
+      const rot=spacePartitioning.getCellVectorRotation(i,cell)
+      if (rot>low&&rot<high){
+        i.color=[150,0,0]
+        return i
+      }
+    })
+  }
+  static test(){
+    let arr=[{x:1,y:0},{x:1,y:1},{x:0,y:1},{x:-1,y:1},{x:-1,y:0},{x:-1,y:-1},{x:0,y:-1},{x:1,y:-1},]
+      arr.forEach(i=>{
+        const rot=getVectorRotation(i)
+      })
   }
 }
 

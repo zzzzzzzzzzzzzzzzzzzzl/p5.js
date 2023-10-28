@@ -10,6 +10,7 @@ export class cell extends Mono{
     }
     constructor(type) {
         super()
+        this.rotation=Math.random()*2*Math.PI
         this.type=type
         cell.cellArr.push(this)
         this.alive = true
@@ -22,6 +23,16 @@ export class cell extends Mono{
         this.color = [100, 200, 10]
       }
       collision(){
+      }
+      handleRotation(n){
+        n=this.rotation+n
+        if (n>Math.PI*2){
+          n-=Math.PI*2
+        }
+        if(n<0){
+          n+=Math.PI*2
+        }
+        this.rotation=n
 
       }
       render() {

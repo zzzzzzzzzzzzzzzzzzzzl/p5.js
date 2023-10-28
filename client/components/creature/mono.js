@@ -2,7 +2,6 @@ import { cell } from "./cell"
 import spacePartitioning from "./spacePartioning"
 
 //handles updates
-
 export class Mono {
   static updateQueue = new Set()
   static renderQueue = new Set()

@@ -5,6 +5,8 @@ import { storeManager } from './storeFunctions'
 import Mono from './mono'
 import spacePartitioning from './spacePartioning'
 import { cell } from './cell'
+import { rotateVector } from './functions'
+import { isConstructorDeclaration } from 'typescript'
 
 // const dispatch = useAppDispatch()
 class Environment extends Mono {
@@ -44,7 +46,7 @@ class Environment extends Mono {
     Array(this.creatureCount)
       .fill()
       .map(() => {
-        return new creature(Environment.envSize, this.defaultGene())
+        return new creature(this.defaultGene())
       })
   }
   genFood() {
@@ -56,11 +58,11 @@ class Environment extends Mono {
     
   }
 
+
   update() {
     Environment.storeManager.onUpdate()
     spacePartitioning.handleSpacePartitioning()
     spacePartitioning.drawGrid()
-    
 
 
   }
