@@ -7,6 +7,7 @@ import spacePartitioning from './spacePartioning'
 import { cell } from './cell'
 import { rotateVector } from './functions'
 import { isConstructorDeclaration } from 'typescript'
+import { camera } from './camera'
 
 // const dispatch = useAppDispatch()
 class Environment extends Mono {
@@ -15,9 +16,10 @@ class Environment extends Mono {
   static divisor = 50 //how many pixels each grid should be
   static searchDistance = 1
   static envSize
-
+  
   constructor(envSize, creatureCount, foodCount) {
     super()
+    this.camera=new camera()
     this.foodCount = foodCount
     Environment.envSize = envSize
     this.creatureCount = creatureCount
@@ -63,6 +65,7 @@ class Environment extends Mono {
     Environment.storeManager.onUpdate()
     spacePartitioning.handleSpacePartitioning()
     spacePartitioning.drawGrid()
+    this.camera.keydown()
 
 
   }

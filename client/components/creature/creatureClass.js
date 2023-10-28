@@ -19,7 +19,7 @@ class creature extends cell {
 
   }
   move(){
-    this.rotation+=(Math.random()-.5)/10
+    this.rotation+=((Math.random()-.5)*3)/10
     const vec=rotateVector(this.rotation)
     this.pos.x += vec.x * this.speed
     this.pos.y += vec.y * this.speed
@@ -95,7 +95,7 @@ class creature extends cell {
       this.findTarget(NearestCell)
     }
 
-    this.drawVisionCone()
+    // this.drawVisionCone()
     this.eatCreature()
     this.eatFood()
     this.render()
