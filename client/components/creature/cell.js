@@ -15,14 +15,15 @@ export class cell extends Mono{
         cell.cellArr.push(this)
         this.alive = true
 
+        this.velocity={x:0,y:0}
+        this.acceloration={x:0,y:0}
+
         this.pos = {
           x: Math.random() * (spacePartitioning.envSize - 100) + 50, 
           y: Math.random() * (spacePartitioning.envSize - 100) + 50,
         }
         this.size = 25
         this.color = [100, 200, 10]
-      }
-      collision(){
       }
       handleRotation(n){
         n=this.rotation+n
@@ -33,7 +34,17 @@ export class cell extends Mono{
           n+=Math.PI*2
         }
         this.rotation=n
-
+      }
+      handleAcceloration(acc){
+        this.acceloration.x+=acc.x
+        this.acceloration.y+=acc.y
+        
+        this.velocity.x+=this.acceloration.x
+        this.velocity.y+=this.acceloration.y
+      }
+      handleVelocity(){
+        this.velocity.x+=this.acceloration.x
+        this.velocity.y+=this.acceloration.y
       }
       render() {
         Environment.p5.fill(this.color)

@@ -9,8 +9,8 @@ import { isConstructorDeclaration } from 'typescript'
 
 // const dispatch = useAppDispatch()
 class spacePartitioning {
-  static envSize = 800
-  static divisor = 50 //how many pixels each grid should be
+  static envSize = 4000
+  static divisor = 150 //how many pixels each grid should be
 
   //holly fuck clean some of this shit up
   static handleSpacePartitioning() {
@@ -46,48 +46,66 @@ class spacePartitioning {
   }
   static drawGrid() {
     //light up adjasent boxes to creatures
-    spacePartitioning.spacePartitioningArray.forEach((i, idx) => {
-      i.forEach((j, jdx) => {
+    for(let i=0;i<spacePartitioning.spacePartitioningArray.length;i++){
+      for(let j=0;j<spacePartitioning.spacePartitioningArray[i].length;j++){
         Environment.p5.fill(50, 100, 50)
         Environment.p5.stroke(150, 250, 50)
+        // console.log("here")
         Environment.p5.square(
-          spacePartitioning.divisor * idx,
-          spacePartitioning.divisor * jdx,
+          spacePartitioning.divisor * i,
+          spacePartitioning.divisor * j,
           spacePartitioning.divisor
-        )
-      })
-    })
-    spacePartitioning.spacePartitioningArray.forEach((i, idx) => {
-      i.forEach((j, jdx) => {
-        if (j[0]) {
-          for (
-            let k = -Environment.searchDistance;
-            k < 1 + Environment.searchDistance;
-            k++
-          ) {
+          )
+        }
+      }
+    }
+    // spacePartitioning.spacePartitioningArray.forEach((i, idx) => {
+    //   i.forEach((j, jdx) => {
+    //     console.log(spacePartitioning.divisor)
+    //     Environment.p5.fill(50, 100, 50)
+    //     Environment.p5.stroke(150, 250, 50)
+    //     // console.log("here")
+    //     Environment.p5.square(
+    //       spacePartitioning.divisor * idx,
+    //       spacePartitioning.divisor * jdx,
+    //       spacePartitioning.divisor
+    //     )
+    //   })
+    // })
+    static highlightGridContaining(){
+
+      spacePartitioning.spacePartitioningArray.forEach((i, idx) => {
+        i.forEach((j, jdx) => {
+          if (j[0]) {
             for (
-              let l = -Environment.searchDistance;
-              l < 1 + Environment.searchDistance;
-              l++
+              let k = -Environment.searchDistance;
+              k < 1 + Environment.searchDistance;
+              k++
             ) {
-              if (
-                idx + k < spacePartitioning.spacePartitioningArray.length &&
-                jdx + l < spacePartitioning.spacePartitioningArray.length &&
-                j[0].type=="creature"
+              for (
+                let l = -Environment.searchDistance;
+                l < 1 + Environment.searchDistance;
+                l++
               ) {
-                Environment.p5.fill(150, 50, 50)
-                Environment.p5.square(
-                  spacePartitioning.divisor * (idx + k),
-                  spacePartitioning.divisor * (jdx + l),
-                  spacePartitioning.divisor
-                )
+                if (
+                  idx + k < spacePartitioning.spacePartitioningArray.length &&
+                  jdx + l < spacePartitioning.spacePartitioningArray.length &&
+                  j[0].type=="creature"
+                ) {
+                  Environment.p5.fill(150, 50, 50)
+                  Environment.p5.square(
+                    spacePartitioning.divisor * (idx + k),
+                    spacePartitioning.divisor * (jdx + l),
+                    spacePartitioning.divisor
+                  )
+                }
               }
             }
           }
-        }
+        })
       })
-    })
-  }
+    }
+  
   static searchForCells(cell) {//returns an array of cells that are in adjasent squares
     let arr = []
     for (
