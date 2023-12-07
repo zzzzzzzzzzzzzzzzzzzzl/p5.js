@@ -27,20 +27,18 @@ export class camera {
         
               this.scale*=1.05
               this.speed*=.95
-              console.log(this.speed,this.scale)
           } else if (Environment.p5.keyIsDown(79)) {
               this.scale*=.95
               this.speed*=1.05
         }
         this.scaleZoom()
         Environment.p5.scale(this.scale)
-        // Environment.p5.translate(this.translate.x,this.translate.y)
+        Environment.p5.translate(this.translate.x,this.translate.y)
 
-        Environment.p5.translate(this.scaleTranslate.x,this.scaleTranslate.y)
+        // Environment.p5.translate(this.scaleTranslate.x,this.scaleTranslate.y)
     }
     scaleZoom(){
       this.scaleTranslate.x=(Environment.envSize)*this.speed
       this.scaleTranslate.y=(Environment.envSize)*this.speed
-      console.log(this.scaleTranslate,this.scale)
     }
   }
