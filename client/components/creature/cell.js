@@ -1,4 +1,5 @@
 import Environment from './Environment'
+import { DistanceBetweenTwoPoints, withinEnvCircleBounds } from './functions'
 import Mono from './mono'
 import spacePartitioning from './spacePartioning'
 
@@ -18,12 +19,22 @@ export class cell extends Mono{
         this.velocity={x:0,y:0}
         this.acceloration={x:0,y:0}
 
-        this.pos = {
-          x: Math.random() * (spacePartitioning.envSize - 100) + 50, 
-          y: Math.random() * (spacePartitioning.envSize - 100) + 50,
-        }
+        this.pos = this.genPos()
         this.size = 25
         this.color = [100, 200, 10]
+      }
+      genPos(){
+        let pos = {
+          x: Math.random() * (spacePartitioning.envSize ) , 
+          y: Math.random() * (spacePartitioning.envSize ) ,
+        }
+        console.log(pos)
+        console.log(spacePartitioning.envSize)
+        console.log(DistanceBetweenTwoPoints(pos,{x:spacePartitioning.envSize/2,y:spacePartitioning.envSize/2}))
+        if(DistanceBetweenTwoPoints(pos,{x:spacePartitioning.envSize/2,y:spacePartitioning.envSize/2})>spacePartitioning.envSize/2){
+          pos=this.genPos()
+        }
+        return pos
       }
       handleRotation(n){
         n=this.rotation+n

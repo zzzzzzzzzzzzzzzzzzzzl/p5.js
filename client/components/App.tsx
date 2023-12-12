@@ -6,7 +6,6 @@ import { useAppSelector } from '../hooks'
 import Mutate from './UI/mutate'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Helpmegod from './UI/UpdateOnFrame'
-
 function Home() {
   const state = useAppSelector((state) => state.nav)
   return (

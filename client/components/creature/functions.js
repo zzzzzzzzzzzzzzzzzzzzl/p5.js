@@ -1,3 +1,6 @@
+import Environment from "./Environment"
+
+
 export function vectorOfTwoPoints(a, b) {
   const x = a.x - b.x
   const y = a.y - b.y

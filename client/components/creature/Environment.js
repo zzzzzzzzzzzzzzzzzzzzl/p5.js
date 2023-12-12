@@ -8,7 +8,6 @@ import { cell } from './cell'
 import { rotateVector } from './functions'
 import { isConstructorDeclaration } from 'typescript'
 import { camera } from './camera'
-
 // const dispatch = useAppDispatch()
 class Environment extends Mono {
   static camera=null
@@ -21,9 +20,12 @@ class Environment extends Mono {
   constructor(envSize, creatureCount, foodCount) {
     super()
     this.camera=new camera()
+    
     Environment.camera=this.camera
-    this.foodCount = foodCount
     Environment.envSize = envSize
+
+
+    this.foodCount = foodCount
     this.creatureCount = creatureCount
     this.defaultGene = () => ({
       vision: 50 + 500 * Math.random(),
@@ -59,7 +61,6 @@ class Environment extends Mono {
       .map(() => {
         return new Food()
       })
-    
   }
 
 
