@@ -7,7 +7,8 @@ export function DistanceBetweenTwoPoints(a, b) {
   const vec = vectorOfTwoPoints(a, b)
   return Math.sqrt(vec.x ** 2 + vec.y ** 2)
 }
-
+//will return a vector of magnitude 1 with rotation theta
+//input should be between 0 and 2PI will return vector with rotation equal to input
 export function rotateVector(theta){
   const vec={x:1,y:0}
   const x=vec.x*Math.cos(theta)-vec.y*Math.sin(theta)

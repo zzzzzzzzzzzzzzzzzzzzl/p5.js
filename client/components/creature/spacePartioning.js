@@ -1,13 +1,9 @@
-// import creature from './creatureClass'
-// import { Food } from './food'
-// import { storeManager } from './storeFunctions'
 import Mono from './mono'
 import Environment from './Environment'
 import { cell } from './cell'
 import { DistanceBetweenTwoPoints, getVectorRotation, vectorOfTwoPoints } from './functions'
 import { isConstructorDeclaration } from 'typescript'
 
-// const dispatch = useAppDispatch()
 class spacePartitioning {
   static envSize = 4000
   static divisor = 150 //how many pixels each grid should be

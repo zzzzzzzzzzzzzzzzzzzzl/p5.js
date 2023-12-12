@@ -1,0 +1,14 @@
+3:12 am 13/12/2023
+ok. need to .. my brain feels lumpy, pain behind eye. having concentration problems and struggling with certain words for the last few days.
+hopefully not permanant that would suck, probably need to do exercise and fix sleep schedule though, hopefully we will be fine in a few days.
+3:18 am 13/12/2023
+ok things to fix add for p5.js, the scope of the project is to big and doing it as a react app might not be the right place, so lets just make something that looks good
+and shows off some features.
+
+make it so that cells cant leave the green circle that shoudl be our environment boundry. 
+
+refactor redux.
+redux is a mess. 
+
+refactor ui.
+remove most of the ui its mostly useless.

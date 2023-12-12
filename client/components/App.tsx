@@ -6,7 +6,6 @@ import Enviroment from './UI/enviroment'
 import { useAppSelector } from '../hooks'
 import Mutate from './UI/mutate'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import TopNav from './UI/topNav'
 import Helpmegod from './UI/UpdateOnFrame'
 
 function Home() {
@@ -42,7 +41,6 @@ function App() {
           return <></>
         })}
       <Helpmegod />
-      <TopNav />
       <Canvas />
       <div style={{ display: `${displayCanvas}` }}></div>
       <Routes>

@@ -11,6 +11,7 @@ import { camera } from './camera'
 
 // const dispatch = useAppDispatch()
 class Environment extends Mono {
+  static camera=null
   static storeManager = new storeManager()
   static p5
   static divisor = 50 //how many pixels each grid should be
@@ -20,6 +21,7 @@ class Environment extends Mono {
   constructor(envSize, creatureCount, foodCount) {
     super()
     this.camera=new camera()
+    Environment.camera=this.camera
     this.foodCount = foodCount
     Environment.envSize = envSize
     this.creatureCount = creatureCount

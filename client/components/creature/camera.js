@@ -6,8 +6,8 @@ import spacePartitioning from "./spacePartioning";
 export class camera {
     constructor(){
         this.scale=1
-        this.speed=1
-        this.scaleTranslate={x:0,y:0}
+        this.speed=7
+        this.scaleTranslate={x:-500,y:-500}
         this.translate={x:-spacePartitioning.envSize/2,y:-spacePartitioning.envSize/2}
     }
     keydown(){

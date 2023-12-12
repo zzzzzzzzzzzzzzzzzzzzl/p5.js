@@ -6,6 +6,9 @@ export const uiSlice = createSlice({
   name: 'ui',
   initialState: {
     fps: 0,
+    cameraScale: 0
+    ,cameraTranslateX:0
+    ,cameraTranslateY:0
   },
 
   reducers: {
@@ -13,10 +16,21 @@ export const uiSlice = createSlice({
       state.fps = action.payload
       return state
     },
+    updateCamera: (state, action) => {
+      console.log(action.payload)
+      if (action.payload){
+        state.cameraScale = action.payload.scale
+        state.cameraTranslateX=action.payload.translate.x
+        state.cameraTranslateY=action.payload.translate.y
+
+        return state
+
+      }
+    },
   },
 })
 
 export const uiSelector = (state: RootState) => state.UI
 
-export const { updateFPS } = uiSlice.actions
+export const { updateFPS,updateCamera } = uiSlice.actions
 export default uiSlice.reducer

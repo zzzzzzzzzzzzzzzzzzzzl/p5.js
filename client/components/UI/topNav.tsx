@@ -2,7 +2,6 @@ import { useAppDispatch } from '../../hooks'
 import { Link } from 'react-router-dom'
 import { changeDisplay } from '../../slices/canvasDisplay'
 import React from 'react'
-import Enviroment from './enviroment'
 
 function TopNav() {
   const dispatch = useAppDispatch()

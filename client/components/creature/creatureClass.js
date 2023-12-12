@@ -16,13 +16,18 @@ class creature extends cell {
     this.gene = gene
     this.color = [this.aggresion * 225, this.greed * 255, 50]
     this.fitness = 1
+    this.rotationAcceleration=0
 
   }
   move(){
-    this.rotation+=((Math.random()-.5)*3)/10
+    let n=((Math.random()-.5))/100
+    this.rotationAcceleration+=n
+    this.rotationAcceleration*=.95
+    this.rotation+=this.rotationAcceleration
     const vec=rotateVector(this.rotation)
     this.pos.x += vec.x * this.speed
     this.pos.y += vec.y * this.speed
+    this.drawVisionCone(vec)
     Environment.p5.line(
       this.pos.x,
       this.pos.y,
@@ -30,9 +35,8 @@ class creature extends cell {
       this.pos.y+vec.y*1000
     )
   }
-  drawVisionCone(){
+  drawVisionCone(vec){
     Environment.p5.stroke(0,0,0)
-    let vec=rotateVector(this.rotation)
     Environment.p5.line(
       this.pos.x,
       this.pos.y,
