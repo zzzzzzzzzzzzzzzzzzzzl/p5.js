@@ -1,6 +1,5 @@
 import Canvas from './canvas'
 import Stats from './UI/stats'
-import GetWord from './words/wordsApi'
 import Nav from './UI/nav'
 import Enviroment from './UI/enviroment'
 import { useAppSelector } from '../hooks'

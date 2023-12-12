@@ -17,7 +17,6 @@ export const uiSlice = createSlice({
       return state
     },
     updateCamera: (state, action) => {
-      console.log(action.payload)
       if (action.payload){
         state.cameraScale = action.payload.scale
         state.cameraTranslateX=action.payload.translate.x
