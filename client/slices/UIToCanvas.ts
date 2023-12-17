@@ -6,30 +6,22 @@ export const uiSlice = createSlice({
   name: 'ui',
   initialState: {
     fps: 0,
-    cameraScale: 0
-    ,cameraTranslateX:0
-    ,cameraTranslateY:0
+    camera: { scale: 0, x: 0, y: 0 },
+    cursor: { x: 0, y: 0 },
+    creatureCount: 0,
+    foodCount: 0,
   },
 
   reducers: {
-    updateFPS: (state, action) => {
-      state.fps = action.payload
+    updateUIData: (state, action) => {
+      state = action.payload
+
       return state
-    },
-    updateCamera: (state, action) => {
-      if (action.payload){
-        state.cameraScale = action.payload.scale
-        state.cameraTranslateX=action.payload.translate.x
-        state.cameraTranslateY=action.payload.translate.y
-
-        return state
-
-      }
     },
   },
 })
 
 export const uiSelector = (state: RootState) => state.UI
 
-export const { updateFPS,updateCamera } = uiSlice.actions
+export const { updateUIData } = uiSlice.actions
 export default uiSlice.reducer

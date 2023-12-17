@@ -1,6 +1,7 @@
-import { updateFPS,updateCamera } from '../../slices/UIToCanvas'
+import { updateFPS, updateCamera, updateUIData } from '../../slices/UIToCanvas'
 import store from '../../store'
 import Environment from './Environment'
+import Mono from './mono'
 
 export class storeManager {
   constructor() {
@@ -9,22 +10,26 @@ export class storeManager {
   getState() {
     return store.getState()
   }
-  getFPS() {
-    store.dispatch(updateFPS(Environment.p5.frameRate()))
-  }
-  getCamera() {
-    let camera={scale:Environment.camera.scale,
-      translate:Environment.camera.translate
+  updateUIData() {
+    const data = {
+      fps: Environment.p5.frameRate(),
+      camera: {
+        scale: Environment.camera.scale,
+        x: Environment.camera.translate.x,
+        y: Environment.camera.translate.y,
+      },
+      cursor: { x: Environment.p5.mouseX, y: Environment.p5.mouseY },
+      // creatureCount:Mono.
+      // Mono.
     }
-
-    store.dispatch(updateCamera(camera))
+    store.dispatch(updateUIData(data))
   }
+
   onUpdate() {
     this.count++
     if (this.count == 10) {
       this.count = 0
-      this.getFPS()
-      this.getCamera()
+      this.updateUIData()
     }
   }
 }

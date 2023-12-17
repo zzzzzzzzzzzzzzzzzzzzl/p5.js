@@ -46,7 +46,6 @@ class spacePartitioning {
       for(let j=0;j<spacePartitioning.spacePartitioningArray[i].length;j++){
         Environment.p5.fill(50, 100, 50)
         Environment.p5.stroke(150, 250, 50)
-        // console.log("here")
         Environment.p5.square(
           spacePartitioning.divisor * i,
           spacePartitioning.divisor * j,
@@ -55,19 +54,7 @@ class spacePartitioning {
         }
       }
     }
-    // spacePartitioning.spacePartitioningArray.forEach((i, idx) => {
-    //   i.forEach((j, jdx) => {
-    //     console.log(spacePartitioning.divisor)
-    //     Environment.p5.fill(50, 100, 50)
-    //     Environment.p5.stroke(150, 250, 50)
-    //     // console.log("here")
-    //     Environment.p5.square(
-    //       spacePartitioning.divisor * idx,
-    //       spacePartitioning.divisor * jdx,
-    //       spacePartitioning.divisor
-    //     )
-    //   })
-    // })
+
     static highlightGridContaining(){
 
       spacePartitioning.spacePartitioningArray.forEach((i, idx) => {
@@ -124,8 +111,7 @@ class spacePartitioning {
             cell.SPindex.y + j
           ].forEach((k) => {
 
-            if(k!=cell){
-
+            if(k!=cell && k.type!='creature'){
               Environment.p5.stroke(255, 0, 230)
               Environment.p5.line(
                 cell.pos.x,

@@ -12,3 +12,23 @@ redux is a mess.
 
 refactor ui.
 remove most of the ui its mostly useless.
+6:05 am 14/12/2023
+8:50 am 14/12/2023
+make creatures no longer highlight red when using space partitioning.
+
+we can add rotation acceloration as a gene
+
+9:39 am 14/12/2023
+can we add creture count,envsize and ....
+
+3:27 pm 17/12/2023
+ok hi. so i want my creature class to be multiple cells and then the gene to contain a blue print for the layoutr of those cells.
+i think we need to move some stuff around. i think we need to make "cell more universal". and change creature to be something like "eye".
+3:37 pm 17/12/2023
+ok so we need to focus.
+4:50 pm 17/12/2023
+we didnt focus.
+refactor so that cell is a thing on its own 
+4:55 pm 17/12/2023
+to pass creature count and food count to redux we have variables in cell enviroment variable.
+4:56 pm 17/12/2023

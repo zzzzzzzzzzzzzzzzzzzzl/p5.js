@@ -10,20 +10,21 @@ import { isConstructorDeclaration } from 'typescript'
 import { camera } from './camera'
 // const dispatch = useAppDispatch()
 class Environment extends Mono {
-  static camera=null
+  static camera = null
   static storeManager = new storeManager()
   static p5
   static divisor = 50 //how many pixels each grid should be
   static searchDistance = 1
   static envSize
-  
+  static creatureCount = 0
+  static foodCount = 0
+
   constructor(envSize, creatureCount, foodCount) {
     super()
-    this.camera=new camera()
-    
-    Environment.camera=this.camera
-    Environment.envSize = envSize
+    // this.camera=new camera()
 
+    Environment.camera = new camera()
+    Environment.envSize = envSize
 
     this.foodCount = foodCount
     this.creatureCount = creatureCount
@@ -63,23 +64,19 @@ class Environment extends Mono {
       })
   }
 
-
   update() {
     Environment.storeManager.onUpdate()
     Environment.p5.background(0)
+
     spacePartitioning.handleSpacePartitioning()
-    
-    this.camera.keydown()
-    
+
+    Environment.camera.keydown()
     this.drawEnvCircle()
-    spacePartitioning.highlightGridContaining()
   }
-  drawEnvCircle(){
-    const n = spacePartitioning.envSize/2
+  drawEnvCircle() {
+    const n = spacePartitioning.envSize / 2
     Environment.p5.fill(50, 100, 50)
-    Environment.p5.ellipse(
-      n,n,n*2,n*2
-      )
+    Environment.p5.ellipse(n, n, n * 2, n * 2)
   }
   setup = (p5, canvasParentRef) => {
     Environment.p5 = p5
@@ -87,8 +84,7 @@ class Environment extends Mono {
     Environment.p5
       .createCanvas(Environment.envSize, Environment.envSize)
       .parent(canvasParentRef)
-
-    }
+  }
   draw = () => {
     Mono.update()
   }
