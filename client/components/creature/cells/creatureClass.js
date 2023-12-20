@@ -1,15 +1,13 @@
-import Enviroment from '../UI/enviroment'
-import Environment from './Environment'
+import Enviroment from '../../UI/enviroment'
+import Environment from '../Environment'
 import { cell } from './cell'
 import {
   DistanceBetweenTwoPoints,
   getVectorRotation,
   rotateVector,
   vectorOfTwoPoints,
-} from './functions'
-import Mono from './mono'
-import spacePartitioning from './spacePartioning'
-import spacePartioning from './spacePartioning'
+} from '../functions'
+import spacePartitioning from '../spacePartioning'
 
 class creature extends cell {
   constructor(gene) {
@@ -20,25 +18,18 @@ class creature extends cell {
     this.aggresion = gene.aggresion
     this.size = gene.size
     this.gene = gene
-    this.color = [this.aggresion * 225, this.greed * 255, 50]
     this.fitness = 1
-    this.rotationAcceleration = 0
+
+    this.creatureCells = []
   }
   move() {
     let n = (Math.random() - 0.5) / 50
-
-    this.rotationAcceleration += n
-    this.rotationAcceleration *= 0.95
-
-    this.rotation += this.rotationAcceleration
+    this.rotation += n
     const vec = rotateVector(this.rotation)
-
-    //check for collision
     const pos = {
       x: this.pos.x + vec.x * this.speed,
       y: this.pos.y + vec.y * this.speed,
     }
-
     if (
       DistanceBetweenTwoPoints(pos, {
         x: spacePartitioning.envSize / 2,
@@ -50,34 +41,31 @@ class creature extends cell {
     }
     this.pos = pos
   }
-  drawVisionCone(vec) {
+  drawVisionCone() {
+    let vec = rotateVector(this.rotation)
     Environment.p5.stroke(0, 0, 0)
     Environment.p5.line(
       this.pos.x,
       this.pos.y,
-      this.pos.x + vec.x * 1000,
-      this.pos.y + vec.y * 1000
+      this.pos.x + vec.x * 350,
+      this.pos.y + vec.y * 350
     )
     vec = rotateVector(this.rotation - this.cone)
     Environment.p5.line(
       this.pos.x,
       this.pos.y,
-      this.pos.x + vec.x * 1000,
-      this.pos.y + vec.y * 1000
+      this.pos.x + vec.x * 350,
+      this.pos.y + vec.y * 350
     )
     vec = rotateVector(this.rotation + this.cone)
     Environment.p5.line(
       this.pos.x,
       this.pos.y,
-      this.pos.x + vec.x * 1000,
-      this.pos.y + vec.y * 1000
+      this.pos.x + vec.x * 350,
+      this.pos.y + vec.y * 350
     )
   }
-  render() {
-    Environment.p5.fill(this.color)
-    Environment.p5.stroke(this.color)
-    Environment.p5.ellipse(this.pos.x, this.pos.y, this.size, this.size) //where does x and y come from what is j?
-  }
+
   eatFood() {
     if (this.targetFood) {
       if (this.targetFoodDistance < this.size) {
@@ -93,7 +81,7 @@ class creature extends cell {
     }
   }
   findTarget(target) {
-    const rot = spacePartioning.getCellVectorRotation(target, this)
+    const rot = this.getCellVectorRotation(target, this)
     if (rot > this.rotation) {
       this.handleRotation(0.01)
     } else {
@@ -102,13 +90,13 @@ class creature extends cell {
   }
   update() {
     this.move()
-    let arr = spacePartioning.searchForCells(this)
-    arr = spacePartioning.getCellInVisionArr(this, arr)
-    const NearestCell = spacePartioning.findNearestCell(this, arr, 'food')
-    if (NearestCell) {
-      this.findTarget(NearestCell)
+    let arr = this.searchForCells(this)
+    // arr = this.getCellInVisionArr(this, arr)
+    const NearestFood = this.findNearestCell(this, arr, 'food')
+    if (NearestFood) {
+      this.findTarget(NearestFood, 'here')
     }
-    console.log(this.targetWorm)
+    // this.drawVisionCone()
     this.eatCreature()
     this.eatFood()
     this.render()

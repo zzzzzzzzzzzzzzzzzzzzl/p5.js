@@ -1,6 +1,6 @@
-import Environment from './Environment'
+import Environment from '../Environment'
 import { cell } from './cell'
-import spacePartitioning from './spacePartioning'
+import spacePartitioning from '../spacePartioning'
 
 export class Food extends cell {
   constructor() {

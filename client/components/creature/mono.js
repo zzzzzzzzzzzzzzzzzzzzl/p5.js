@@ -1,4 +1,4 @@
-import { cell } from './cell'
+import { cell } from './cells/cell'
 import spacePartitioning from './spacePartioning'
 
 //handles updates
@@ -32,7 +32,7 @@ export class Mono {
     Mono.countObjects()
     cell.filterDeadCells()
     Mono.objects = Mono.countObjects()
-    console.log(Mono.objects)
+    console.log()
   }
   constructor() {
     Mono.updateQueue.add(this)

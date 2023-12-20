@@ -32,3 +32,17 @@ refactor so that cell is a thing on its own
 4:55 pm 17/12/2023
 to pass creature count and food count to redux we have variables in cell enviroment variable.
 4:56 pm 17/12/2023
+there is no creature cell. basicly we need to change creature so that it is more of a cell layout blueprint rather than a cell.
+4:58 pm 17/12/2023
+9:46 am 19/12/2023
+bug with finding closest cell not sure what it is.
+12:58 pm 20/12/2023
+hi. issue with 
+1:12 pm 20/12/2023
+time evaporates.
+1:18 pm 20/12/2023
+ok so issue with the script is that ................. getcellinvisionarr function stops working sometimes, it looks like
+visionarr dosent work. we can come back to it later to fix it, but in the grand scheme it isnt really adding that much, leanrt some math though..
+1:59 pm 20/12/2023 
+try to create a creature class which is a container for multiple cells.
+1:59 pm 20/12/2023
