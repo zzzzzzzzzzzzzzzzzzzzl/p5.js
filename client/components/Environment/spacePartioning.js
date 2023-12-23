@@ -1,11 +1,11 @@
 import Mono from './mono'
-import Environment from './Environment'
+import Environment from '../p5scene/Environment'
 import { cell } from './cells/cell'
 import {
   DistanceBetweenTwoPoints,
   getVectorRotation,
   vectorOfTwoPoints,
-} from './functions'
+} from '../functions'
 import { isConstructorDeclaration } from 'typescript'
 
 class spacePartitioning {
@@ -52,9 +52,9 @@ class spacePartitioning {
         j < spacePartitioning.spacePartitioningArray[i].length;
         j++
       ) {
-        Environment.p5.fill(50, 100, 50)
-        Environment.p5.stroke(150, 250, 50)
-        Environment.p5.square(
+        sceneManager.p5.fill(50, 100, 50)
+        sceneManager.p5.stroke(150, 250, 50)
+        sceneManager.p5.square(
           spacePartitioning.divisor * i,
           spacePartitioning.divisor * j,
           spacePartitioning.divisor
@@ -82,8 +82,8 @@ class spacePartitioning {
                 jdx + l < spacePartitioning.spacePartitioningArray.length &&
                 j[0].type == 'creature'
               ) {
-                Environment.p5.fill(150, 50, 50)
-                Environment.p5.square(
+                sceneManager.p5.fill(150, 50, 50)
+                sceneManager.p5.square(
                   spacePartitioning.divisor * (idx + k),
                   spacePartitioning.divisor * (jdx + l),
                   spacePartitioning.divisor

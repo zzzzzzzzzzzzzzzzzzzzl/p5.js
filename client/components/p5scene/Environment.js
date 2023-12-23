@@ -1,17 +1,16 @@
-import p5 from 'p5'
-import creature from './cells/creatureClass'
-import { Food } from './cells/food'
-import { storeManager } from './storeFunctions'
-import Mono from './mono'
-import spacePartitioning from './spacePartioning'
-import { cell } from './cells/cell'
-import { rotateVector } from './functions'
-import { isConstructorDeclaration } from 'typescript'
-import { camera } from './camera'
+import creature from '../Environment/cells/creatureClass'
+import { Food } from '../Environment/cells/food'
+import { storeManager } from '../storeManager'
+import Mono from '../Environment/mono'
+import spacePartitioning from '../Environment/spacePartioning'
+import { cell } from '../Environment/cells/cell'
+import { camera } from '../Environment/camera'
+import { sceneManager } from './sceneManager'
 // const dispatch = useAppDispatch()
-class Environment extends Mono {
-  static camera = null
-  static storeManager = new storeManager()
+class Environment {
+  static camera = new camera()
+
+  //should probably just be a static function
   static p5
   static divisor = 50 //how many pixels each grid should be
   static searchDistance = 1
@@ -20,10 +19,6 @@ class Environment extends Mono {
   static foodCount = 0
 
   constructor(envSize, creatureCount, foodCount) {
-    super()
-    // this.camera=new camera()
-
-    Environment.camera = new camera()
     Environment.envSize = envSize
 
     this.foodCount = foodCount
@@ -63,29 +58,21 @@ class Environment extends Mono {
         return new Food()
       })
   }
+  drawEnvCircle() {
+    const n = spacePartitioning.envSize / 2
+    sceneManager.p5.fill(50, 100, 50)
+    sceneManager.p5.ellipse(n, n, n * 2, n * 2)
+  }
 
   update() {
-    Environment.storeManager.onUpdate()
-    Environment.p5.background(0)
+    // Environment.storeManager.onUpdate()
+    sceneManager.p5.background(0)
 
     spacePartitioning.handleSpacePartitioning()
 
     Environment.camera.keydown()
-    this.drawEnvCircle()
-  }
-  drawEnvCircle() {
-    const n = spacePartitioning.envSize / 2
-    Environment.p5.fill(50, 100, 50)
-    Environment.p5.ellipse(n, n, n * 2, n * 2)
-  }
-  setup = (p5, canvasParentRef) => {
-    Environment.p5 = p5
 
-    Environment.p5
-      .createCanvas(Environment.envSize, Environment.envSize)
-      .parent(canvasParentRef)
-  }
-  draw = () => {
+    this.drawEnvCircle()
     Mono.update()
   }
 }

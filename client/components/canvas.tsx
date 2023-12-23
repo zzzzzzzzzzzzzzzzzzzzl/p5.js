@@ -1,16 +1,11 @@
 import { useAppSelector } from '../hooks'
-import Environment from './creature/Environment'
+import Environment from './p5scene/Environment'
 import Sketch from 'react-p5'
+import { sceneManager } from './p5scene/sceneManager'
 
 function Canvas() {
-  const state = useAppSelector((state) => state.game)
-
-  let env = new Environment(800, 50, 1000)
-  return (
-    // <div style={{ display: 'inline-block' }}>
-    <Sketch setup={env.setup} draw={env.draw} />
-    // </div>
-  )
+  let env = new sceneManager()
+  return <Sketch setup={env.setup} draw={env.draw} />
 }
 
 export default Canvas

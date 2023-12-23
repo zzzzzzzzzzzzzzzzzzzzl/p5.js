@@ -1,6 +1,7 @@
-import Environment from '../Environment'
+import Environment from '../../p5scene/Environment'
 import { cell } from './cell'
 import spacePartitioning from '../spacePartioning'
+import { sceneManager } from '../../p5scene/sceneManager'
 
 export class Food extends cell {
   constructor() {
@@ -15,9 +16,9 @@ export class Food extends cell {
     this.size = 5
   }
   render() {
-    Environment.p5.fill(this.color)
-    Environment.p5.stroke(this.color)
-    Environment.p5.ellipse(this.pos.x, this.pos.y, this.size, this.size)
+    sceneManager.p5.fill(this.color)
+    sceneManager.p5.stroke(this.color)
+    sceneManager.p5.ellipse(this.pos.x, this.pos.y, this.size, this.size)
     this.color = [100, 200, 10]
   }
 

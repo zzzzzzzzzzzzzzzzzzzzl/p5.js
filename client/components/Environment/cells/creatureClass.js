@@ -1,17 +1,21 @@
-import Enviroment from '../../UI/enviroment'
-import Environment from '../Environment'
 import { cell } from './cell'
 import {
   DistanceBetweenTwoPoints,
+  genPos,
   getVectorRotation,
   rotateVector,
   vectorOfTwoPoints,
-} from '../functions'
+} from '../../functions'
 import spacePartitioning from '../spacePartioning'
+import Mono from '../mono'
+import { sceneManager } from '../../p5scene/sceneManager'
 
-class creature extends cell {
+class creature extends Mono {
+  //creature is a container for cells
+  //creature has a pos and cells also have a pos
+  //idea is that we have a cell layout which is a bunch of vectors and then we move and rotate that around in a grater space
   constructor(gene) {
-    super('creature')
+    super()
     this.cone = 0.5
     this.speed = gene.speed
     this.greed = gene.greed
@@ -19,8 +23,13 @@ class creature extends cell {
     this.size = gene.size
     this.gene = gene
     this.fitness = 1
-
-    this.creatureCells = []
+    this.pos = genPos()
+    this.creatureCells = [new cell(), new cell()]
+    this.creatureCells.map((i) => {
+      i.pos.x = this.pos.x + Math.random() * 30
+      i.pos.y = this.pos.y + Math.random() * 30
+    })
+    this.rotation = 0
   }
   move() {
     let n = (Math.random() - 0.5) / 50
@@ -30,6 +39,19 @@ class creature extends cell {
       x: this.pos.x + vec.x * this.speed,
       y: this.pos.y + vec.y * this.speed,
     }
+    this.pos = pos
+    this.updateCells()
+  }
+  updateCells() {
+    this.creatureCells.forEach((i, idx) => {
+      i.rotation = this.rotation
+
+      i.pos.x = this.pos.x + idx * i.size
+      i.pos.y = this.pos.y + idx * i.size
+    })
+  }
+
+  checkboundryCollision() {
     if (
       DistanceBetweenTwoPoints(pos, {
         x: spacePartitioning.envSize / 2,
@@ -39,26 +61,26 @@ class creature extends cell {
     ) {
       this.rotation += Math.PI
     }
-    this.pos = pos
   }
   drawVisionCone() {
     let vec = rotateVector(this.rotation)
-    Environment.p5.stroke(0, 0, 0)
-    Environment.p5.line(
+    sceneManager.p5
+    sceneManager.p5.stroke(0, 0, 0)
+    sceneManager.p5.line(
       this.pos.x,
       this.pos.y,
       this.pos.x + vec.x * 350,
       this.pos.y + vec.y * 350
     )
     vec = rotateVector(this.rotation - this.cone)
-    Environment.p5.line(
+    sceneManager.p5.line(
       this.pos.x,
       this.pos.y,
       this.pos.x + vec.x * 350,
       this.pos.y + vec.y * 350
     )
     vec = rotateVector(this.rotation + this.cone)
-    Environment.p5.line(
+    sceneManager.p5.line(
       this.pos.x,
       this.pos.y,
       this.pos.x + vec.x * 350,
@@ -81,25 +103,40 @@ class creature extends cell {
     }
   }
   findTarget(target) {
-    const rot = this.getCellVectorRotation(target, this)
+    function getCellVectorRotation(cell2, cell) {
+      const vec = vectorOfTwoPoints(cell.pos, cell2.pos)
+      return getVectorRotation(vec)
+    }
+    const rot = getCellVectorRotation(target, this)
     if (rot > this.rotation) {
       this.handleRotation(0.01)
     } else {
       this.handleRotation(-0.01)
     }
   }
+  handleRotation(n) {
+    n = this.rotation + n
+    if (n > Math.PI * 2) {
+      n -= Math.PI * 2
+    }
+    if (n < 0) {
+      n += Math.PI * 2
+    }
+    this.rotation = n
+  }
   update() {
     this.move()
-    let arr = this.searchForCells(this)
-    // arr = this.getCellInVisionArr(this, arr)
-    const NearestFood = this.findNearestCell(this, arr, 'food')
+    let arr = this.creatureCells[0].searchForCells(this.creatureCells[0])
+    const NearestFood = this.creatureCells[0].findNearestCell(
+      this.creatureCells[0],
+      arr,
+      'food'
+    )
+
+    // this.findNearestCell(this, arr, 'food')
     if (NearestFood) {
       this.findTarget(NearestFood, 'here')
     }
-    // this.drawVisionCone()
-    this.eatCreature()
-    this.eatFood()
-    this.render()
   }
 }
 

@@ -2,18 +2,18 @@ import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
 export const uiSlice = createSlice({
-  name: 'canvas',
+  name: 'ui',
   initialState: {
-    scene: 'environment',
+    fps: 0,
+    camera: { scale: 0, x: 0, y: 0 },
+    cursor: { x: 0, y: 0 },
+    creatureCount: 0,
+    foodCount: 0,
   },
 
   reducers: {
-    updateCanvasData: (state, action) => {
+    updateUIData: (state, action) => {
       state = action.payload
-      return state
-    },
-    loadScene: (state, action) => {
-      state.scene = action.payload
       return state
     },
   },
@@ -21,5 +21,5 @@ export const uiSlice = createSlice({
 
 export const CanvasToUI = (state: RootState) => state.CanvasToUI
 
-export const { updateCanvasData, loadScene } = uiSlice.actions
+export const { updateUIData } = uiSlice.actions
 export default uiSlice.reducer

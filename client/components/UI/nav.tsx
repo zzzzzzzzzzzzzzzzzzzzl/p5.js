@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../hooks'
-import { changeDisplay } from '../../slices/nav'
 import React from 'react'
+import { LoadScene } from './LoadScene'
 
 function Nav() {
   const dispatch = useAppDispatch()
@@ -17,9 +17,6 @@ function Nav() {
     return colour
   }
 
-  function handleClick(event) {
-    dispatch(changeDisplay(event.target.id))
-  }
   return (
     <div
       style={{
@@ -27,71 +24,8 @@ function Nav() {
         gridGap: '10px',
       }}
     >
-      <div
-        id="stats"
-        onClick={handleClick}
-        style={{
-          backgroundColor: `rgb(${colour})`,
-          height: '100px',
-          borderRadius: '10px',
-          display: 'inline-block',
-          padding: '20px',
-          margin: '5px',
-        }}
-      >
-        <div
-          id="stats"
-          onClick={handleClick}
-          style={{ color: 'white', margin: 'auto', fontSize: '21px' }}
-        >
-          stats:{' '}
-        </div>
-        here{' '}
-      </div>
-
-      <div
-        id="mutate"
-        onClick={handleClick}
-        style={{
-          backgroundColor: `rgb(${incrementColour()})`,
-          height: '100px',
-          borderRadius: '10px',
-          display: 'inline-block',
-          padding: '20px',
-          margin: '5px',
-        }}
-      >
-        <div
-          id="mutate"
-          onClick={handleClick}
-          style={{ color: 'white', margin: 'auto', fontSize: '21px' }}
-        >
-          mutate:{' '}
-        </div>
-        here{' '}
-      </div>
-
-      <div
-        id="enviroment"
-        onClick={handleClick}
-        style={{
-          backgroundColor: `rgb(${incrementColour()})`,
-          height: '100px',
-          borderRadius: '10px',
-          display: 'inline-block',
-          padding: '20px',
-          margin: '5px',
-        }}
-      >
-        <div
-          id="enviroment"
-          onClick={handleClick}
-          style={{ color: 'white', margin: 'auto', fontSize: '21px' }}
-        >
-          enviroment:{' '}
-        </div>
-        here{' '}
-      </div>
+      <LoadScene name="creatureEditor" />
+      <LoadScene name="environment" />
     </div>
   )
 }

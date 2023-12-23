@@ -32,7 +32,6 @@ export class Mono {
     Mono.countObjects()
     cell.filterDeadCells()
     Mono.objects = Mono.countObjects()
-    console.log()
   }
   constructor() {
     Mono.updateQueue.add(this)

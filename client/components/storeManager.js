@@ -1,7 +1,8 @@
-import { updateFPS, updateCamera, updateUIData } from '../../slices/UIToCanvas'
-import store from '../../store'
-import Environment from './Environment'
-import Mono from './mono'
+import { updateFPS, updateCamera, updateUIData } from '../slices/CanvasToUI'
+import store from '../store'
+import Environment from './p5scene/Environment'
+import Mono from './Environment/mono'
+import { sceneManager } from './p5scene/sceneManager'
 
 export class storeManager {
   constructor() {
@@ -12,15 +13,13 @@ export class storeManager {
   }
   updateUIData() {
     const data = {
-      fps: Environment.p5.frameRate(),
+      fps: sceneManager.p5.frameRate(),
       camera: {
         scale: Environment.camera.scale,
         x: Environment.camera.translate.x,
         y: Environment.camera.translate.y,
       },
-      cursor: { x: Environment.p5.mouseX, y: Environment.p5.mouseY },
-      // creatureCount:Mono.
-      // Mono.
+      cursor: { x: sceneManager.p5.mouseX, y: sceneManager.p5.mouseY },
     }
     store.dispatch(updateUIData(data))
   }

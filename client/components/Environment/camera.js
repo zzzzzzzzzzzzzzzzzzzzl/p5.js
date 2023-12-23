@@ -1,7 +1,4 @@
-import environment from '../../slices/environment'
-import Environment from './Environment'
-import Mono from './mono'
-import spacePartitioning from './spacePartioning'
+import { sceneManager } from '../p5scene/sceneManager'
 
 export class camera {
   constructor() {
@@ -14,32 +11,32 @@ export class camera {
     }
   }
   keydown() {
-    if (Environment.p5.keyIsDown(87)) {
+    if (sceneManager.p5.keyIsDown(87)) {
       // "W" key
       this.translate.y += this.speed / this.scale
     }
-    if (Environment.p5.keyIsDown(83)) {
+    if (sceneManager.p5.keyIsDown(83)) {
       // "S" key
       this.translate.y -= this.speed / this.scale
     }
-    if (Environment.p5.keyIsDown(65)) {
+    if (sceneManager.p5.keyIsDown(65)) {
       // "A" key
       this.translate.x += this.speed / this.scale
     }
-    if (Environment.p5.keyIsDown(68)) {
+    if (sceneManager.p5.keyIsDown(68)) {
       // "D" key
       this.translate.x -= this.speed / this.scale
     }
-    if (Environment.p5.keyIsDown(80)) {
+    if (sceneManager.p5.keyIsDown(80)) {
       //"p" key
       this.scale *= 1.05
-    } else if (Environment.p5.keyIsDown(79)) {
+    } else if (sceneManager.p5.keyIsDown(79)) {
       //"o" key
 
       this.scale *= 0.95
     }
 
-    Environment.p5.scale(this.scale)
-    Environment.p5.translate(this.translate.x, this.translate.y)
+    sceneManager.p5.scale(this.scale)
+    sceneManager.p5.translate(this.translate.x, this.translate.y)
   }
 }
