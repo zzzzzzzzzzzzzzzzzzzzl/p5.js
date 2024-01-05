@@ -6,18 +6,6 @@ import { loadScene } from '../../slices/UIToCanvas'
 function Nav() {
   const dispatch = useAppDispatch()
 
-  let colour = [
-    50 + Math.random() * 60,
-    80 + Math.random() * 60,
-    20 + Math.random() * 20,
-  ]
-  function incrementColour() {
-    colour = colour.map((i) => {
-      return i + 20 - Math.random() * 40
-    })
-    return colour
-  }
-
   return (
     <div
       style={{
