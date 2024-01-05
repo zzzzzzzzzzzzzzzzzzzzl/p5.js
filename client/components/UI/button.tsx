@@ -2,22 +2,23 @@ import { useAppDispatch } from '../../hooks'
 
 import React from 'react'
 import { loadScene } from '../../slices/UIToCanvas'
-
-export function LoadScene(props) {
+export function Button(props) {
   const dispatch = useAppDispatch()
-
+  const objFN = {
+    loadScene: () => {
+      dispatch(loadScene(props.name))
+    },
+    heck: () => {},
+  }
   let colour = [
     50 + Math.random() * 60,
     80 + Math.random() * 60,
     20 + Math.random() * 20,
   ]
-  function handleClick(event) {
-    dispatch(loadScene(props.name))
-  }
+
   return (
     <div
       id="stats"
-      onClick={handleClick}
       style={{
         backgroundColor: `rgb(${colour})`,
         height: '100px',
@@ -26,6 +27,7 @@ export function LoadScene(props) {
         padding: '20px',
         margin: '5px',
       }}
+      onClick={objFN[props.fn]}
     >
       <div
         id="stats"

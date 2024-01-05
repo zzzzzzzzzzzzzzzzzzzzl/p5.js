@@ -4,7 +4,7 @@ import { RootState } from '../store'
 export const uiSlice = createSlice({
   name: 'canvas',
   initialState: {
-    scene: 'environment',
+    scene: 'creatureEditor',
   },
 
   reducers: {
@@ -13,6 +13,7 @@ export const uiSlice = createSlice({
       return state
     },
     loadScene: (state, action) => {
+      console.log(action.payload)
       state.scene = action.payload
       return state
     },

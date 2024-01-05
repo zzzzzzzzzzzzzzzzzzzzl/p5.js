@@ -46,3 +46,9 @@ visionarr dosent work. we can come back to it later to fix it, but in the grand 
 1:59 pm 20/12/2023 
 try to create a creature class which is a container for multiple cells.
 1:59 pm 20/12/2023
+2:33 am 24/12/2023
+need to add creature editor, we can change the scene now, so thats nice, we need. we need to create some sort of vector layout for the creature though may require a bit of though,
+on how to place cells.
+11:29 pm 27/12/2023
+create some sort of initialization variable script.
+idk things are getting kind of messy would be nice to be nice

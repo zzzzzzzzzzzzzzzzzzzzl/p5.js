@@ -14,13 +14,10 @@ class Environment {
   static p5
   static divisor = 50 //how many pixels each grid should be
   static searchDistance = 1
-  static envSize
   static creatureCount = 0
   static foodCount = 0
 
-  constructor(envSize, creatureCount, foodCount) {
-    Environment.envSize = envSize
-
+  constructor(creatureCount, foodCount) {
     this.foodCount = foodCount
     this.creatureCount = creatureCount
     this.defaultGene = () => ({

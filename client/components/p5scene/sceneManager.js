@@ -5,12 +5,13 @@ import creatureEditor from './creatureEditor'
 export class sceneManager {
   static p5
   static storeManager = new storeManager()
-  static canvasSize = 1000
+  static canvasSize = 600
+
   constructor() {
-    this.env = new Environment(100, 100, 100)
-    this.creatureEditor = new creatureEditor()
-    this.update = this.env.update
-    this.scenes = { environment: this.env, creatureEditor: this.creatureEditor }
+    this.scenes = {
+      environment: new Environment(100, 100),
+      creatureEditor: new creatureEditor(),
+    }
   }
   loadScene(fn) {
     this.update = this.env
@@ -25,8 +26,6 @@ export class sceneManager {
   }
   draw = () => {
     const state = sceneManager.storeManager.getState()
-    console.log(state.UIToCanvas)
-
     this.scenes[state.UIToCanvas.scene].update()
   }
 }

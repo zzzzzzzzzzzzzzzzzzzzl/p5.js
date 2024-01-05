@@ -9,7 +9,10 @@ function App() {
   return (
     <div>
       <Debugger />
-      <Canvas />
+      <div>
+        <Canvas />
+        <div className="evilDoerHellRaiser"></div>
+      </div>
       <Nav />
     </div>
   )

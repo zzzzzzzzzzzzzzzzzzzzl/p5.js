@@ -1,6 +1,7 @@
 import { useAppDispatch } from '../../hooks'
 import React from 'react'
-import { LoadScene } from './LoadScene'
+import { Button } from './button'
+import { loadScene } from '../../slices/UIToCanvas'
 
 function Nav() {
   const dispatch = useAppDispatch()
@@ -24,8 +25,8 @@ function Nav() {
         gridGap: '10px',
       }}
     >
-      <LoadScene name="creatureEditor" />
-      <LoadScene name="environment" />
+      <Button name="creatureEditor" fn="loadScene" />
+      <Button name="environment" fn="loadScene" />
     </div>
   )
 }
