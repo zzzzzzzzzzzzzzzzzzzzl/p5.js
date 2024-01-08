@@ -4,8 +4,6 @@ import { Button } from './button'
 import { loadScene } from '../../slices/UIToCanvas'
 
 function Nav() {
-  const dispatch = useAppDispatch()
-
   return (
     <div
       style={{

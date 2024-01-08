@@ -27,5 +27,9 @@ export class sceneManager {
   draw = () => {
     const state = sceneManager.storeManager.getState()
     this.scenes[state.UIToCanvas.scene].update()
+    sceneManager.storeManager.updateUIData()
+  }
+  keyReleased = () => {
+    console.log('here')
   }
 }

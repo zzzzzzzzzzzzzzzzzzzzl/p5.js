@@ -52,3 +52,6 @@ on how to place cells.
 11:29 pm 27/12/2023
 create some sort of initialization variable script.
 idk things are getting kind of messy would be nice to be nice
+7:22 pm 8/01/2024
+issue with the buttons to change the scene.
+the onclick is kind of fuckkkey.

@@ -7,6 +7,7 @@ let colour = [
 ]
 function Debugger() {
   const state = useAppSelector((state) => state.CanvasToUI)
+
   return (
     <div
       id="stats"
