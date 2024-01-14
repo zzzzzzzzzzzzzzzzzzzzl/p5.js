@@ -3,6 +3,7 @@ import store from '../store'
 import Environment from './p5scene/Environment'
 import Mono from './Environment/mono'
 import { sceneManager } from './p5scene/sceneManager'
+import { keyUp } from '../slices/keyboardInputs'
 
 export class storeManager {
   constructor() {
@@ -30,5 +31,8 @@ export class storeManager {
       this.count = 0
       this.updateUIData()
     }
+  }
+  keyUp(key) {
+    store.dispatch(keyUp(key))
   }
 }

@@ -6,6 +6,11 @@ export function vectorOfTwoPoints(a, b) {
   const y = a.y - b.y
   return { x: x, y: y }
 }
+export function unitVector(a, b) {
+  let vec = vectorOfTwoPoints(a, b)
+  const m = DistanceBetweenTwoPoints(a, b)
+  return { x: vec.x / m, y: vec.y / m }
+}
 export function DistanceBetweenTwoPoints(a, b) {
   const vec = vectorOfTwoPoints(a, b)
   return Math.sqrt(vec.x ** 2 + vec.y ** 2)
@@ -36,4 +41,9 @@ export function genPos() {
     pos = genPos()
   }
   return pos
+}
+export function getRandomInt(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }

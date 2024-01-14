@@ -13,6 +13,8 @@ function Debugger() {
       id="stats"
       style={{
         backgroundColor: `rgb(${colour})`,
+        color: 'white',
+        fontSize: '21px',
         borderRadius: '10px',
         display: 'inline-block',
         padding: '20px',

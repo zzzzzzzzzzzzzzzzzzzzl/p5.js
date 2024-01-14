@@ -5,26 +5,3 @@ body {
   font-family: 'Poppins', sans-serif;
   text-align: center;
 }
-.p5Canvas {
-}
-main {
-  display: inline;
-}
-#creatureStats {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 1rem;
-}
-#stat {
-  padding: 4px;
-  border-radius: 8px;
-}
-#canvasParent {
-  text-align: center;
-  padding: 50px;
-}
-
-#evilDoerHellRaiser {
-  margin: 100px;
-  background-color: red;
-}

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
 export const uiSlice = createSlice({
-  name: 'canvas',
+  name: 'ss',
   initialState: {
     scene: 'creatureEditor',
   },

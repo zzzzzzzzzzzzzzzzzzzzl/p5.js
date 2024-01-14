@@ -1,3 +1,5 @@
+import { keyUp } from '../../slices/keyboardInputs'
+import store from '../../store'
 import { storeManager } from '../storeManager'
 import Environment from './Environment'
 import creatureEditor from './creatureEditor'
@@ -25,11 +27,14 @@ export class sceneManager {
       .parent(canvasParentRef)
   }
   draw = () => {
+    store.dispatch(keyUp(this.keyUp))
+    this.keyUp = ''
+
     const state = sceneManager.storeManager.getState()
     this.scenes[state.UIToCanvas.scene].update()
     sceneManager.storeManager.updateUIData()
   }
   keyReleased = () => {
-    console.log('here')
+    this.keyUp = sceneManager.p5.key
   }
 }
